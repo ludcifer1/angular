@@ -1,6 +1,13 @@
-<button
-class="btn btn-primary"
-[disabled]="!allowNewUser">
+<p>User Name: </p>
+<input type="text" class="form-control"
+                   (input)="onUpdateUserName($event)"
+>
+<p>{{userName}}</p>
+<button class="btn btn-primary"
+       [disabled]="!allowNewUser"
+       (click)="onCreateUser()"
+       >
   Add User
 </button>
-<p>{{allowNewUser}}</p>
+<!-- <p>{{allowNewUser}}</p> -->
+<p>{{userCreationStatus}}</p>

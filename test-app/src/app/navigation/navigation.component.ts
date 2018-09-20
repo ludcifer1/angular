@@ -7,12 +7,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationComponent implements OnInit {
 
-allowNewUser = false;
+  allowNewUser = false;
+  userCreationStatus = 'No new User';
+  userName='';
 
-constructor() {
-  setTimeout(function () { this.allowNewUser = true; console.log(this.allowNewUser); }, 2000);
-}
+  constructor() {
+    // var self = this;
+    setTimeout(() => {
+      console.log(this);
+      this.allowNewUser = true;
+      console.log(this.allowNewUser);
+    }
+      , 2000);
+  }
 
-ngOnInit() {
-}
+  ngOnInit() {
+  }
+  onCreateUser() {
+    this.userCreationStatus = 'New User Created '+ this.userName;
+  }
+  onUpdateUserName(event: Event) {
+    this.userName=(<HTMLInputElement>event.target).value;
+    this.userName = event.target.value;
+  }
 }
