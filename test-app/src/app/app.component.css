@@ -1,0 +1,10 @@
+h1{
+   color: red;
+}
+app-header{
+ color: cyan;  
+ transition: all 0.5s;
+}
+app-header:hover{
+   color:black;
+}
