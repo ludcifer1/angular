@@ -1,29 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { MainPanelComponent } from './main-panel/main-panel.component';
-import { TableComponent } from './table/table.component';
-import { NavigationComponent } from './navigation/navigation.component';
+import { AppComponent } from "./app.component";
+import { FormsModule } from "@angular/forms";
+import { HeaderComponent } from "./header/header.component";
+import { UserComponent } from "./user/user.component";
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    MainPanelComponent,
-    TableComponent,
-    NavigationComponent,
-  ],
-  imports: [
-    BrowserModule,
-  ],
+  declarations: [AppComponent, HeaderComponent, UserComponent, UsersComponent],
+  imports: [BrowserModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-
-export class AppModule { 
-   
- } 
+export class AppModule {}

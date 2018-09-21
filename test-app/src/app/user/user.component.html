@@ -1,0 +1,4 @@
+<p>
+  User: {{userName}} --- Status:
+  <span [ngStyle]="{'color': getColor()}" [ngClass]="{'alive': getUserStatus()==='Alive' }">{{getUserStatus()}}</span>
+</p>

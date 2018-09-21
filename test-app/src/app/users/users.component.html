@@ -1,0 +1,23 @@
+<button class="btn btn-danger" [disabled]='!allowNewUser' (click)="onCreateUser()">
+  Add User
+</button>
+<br>
+<button class="btn btn-primary" [disabled]='!userName' (click)="resetUserName()">
+  Reset
+</button>
+<!-- The Same -->
+<!-- <p [innerText]='allowNewUser'></p>
+<p>{{allowNewUser}}</p> -->
+<p>
+  {{userCreationStatus}}
+</p>
+<!-- /////////////////// -->
+<input type="text" class="form-control" [(ngModel)]="userName" (click)="onInputSelected()">
+<p *ngIf="hasNewUser; else noUser">New User Is: {{userName}} This one was created by using NG-IF</p>
+<ng-template #noUser>
+  <p>
+    No User Created, Created by NG-IF-ELSE
+  </p>
+</ng-template>
+<hr>
+<app-user *ngFor="let user of users"></app-user>
