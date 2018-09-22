@@ -15,9 +15,22 @@
 <input type="text" class="form-control" [(ngModel)]="userName" (click)="onInputSelected()">
 <p *ngIf="hasNewUser; else noUser">New User Is: {{userName}} This one was created by using NG-IF</p>
 <ng-template #noUser>
-  <p>
+  <p> 
     No User Created, Created by NG-IF-ELSE
   </p>
 </ng-template>
 <hr>
 <app-user *ngFor="let user of users"></app-user>
+<!-- --------------------------------------- -->
+<hr>
+<button class="btn btn-primary" (click)="onToggleClick()">Toggle</button>
+<h2 *ngIf="toggleOn; else toggleOff">Boom Shakalaka
+</h2>
+<ng-template #toggleOff>
+  <h2>Boom ?</h2>
+</ng-template>
+
+<h3>Log: </h3>
+<div *ngFor="let log of togglerArray; let i= index" [ngStyle]="{'background-color': i>=4?'blue':'transparent'}">
+  <p> Count is: {{i+1}}</p>
+</div>

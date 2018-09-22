@@ -15,6 +15,8 @@ import { Component } from "@angular/core";
 export class UserComponent {
   userName: String = "Lincoln";
   userStatus: String = "Live";
+  
+
   constructor() {
     this.userStatus = Math.random() > 0.5 ? "Alive" : "Not Alive";
   }
@@ -25,4 +27,5 @@ export class UserComponent {
   getColor() {
     return this.userStatus === "Alive" ? "green" : "red";
   }
+
 }
