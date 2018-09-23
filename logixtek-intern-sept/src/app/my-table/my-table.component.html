@@ -1,3 +1,7 @@
+<div class="btn-group mb-4" (click)="onCreateApplicant()">
+  <button class="btn btn-danger">Add Applicant</button>
+</div>
+
 <div class="table-responsive-xl">
   <table class="table table-bordered">
     <thead class="thead-dark">
@@ -14,15 +18,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Nam Tran</td>
-        <td>SSEE</td>
-        <td>Interview</td>
-        <td>Xiaoxiao@gmail.com</td>
-        <td>0011223344</td>
-        <td> Mr A</td>
-        <td> Mr B</td>
+      <tr *ngFor="let applicant of applicants let i =index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{applicant.name}}</td>
+        <td>{{applicant.applyFor}}</td>
+        <td>{{applicant.stage}}</td>
+        <td>{{applicant.email}}</td>
+        <td>{{applicant.phone}}</td>
+        <td> {{applicant.psi}}</td>
+        <td> {{applicant.psd}}</td>
         <td>
           <div class="btn-group">
             <button type="button" class="btn btn-warning btn-my">Edit</button>
