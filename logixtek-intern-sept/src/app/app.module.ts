@@ -1,12 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { BodyComponent } from './body/body.component';
-import { MyTableComponent } from './my-table/my-table.component';
-import { MyRowComponent } from './my-row/my-row.component';
+import { AppComponent } from "./app.component";
+import { HeaderComponent } from "./header/header.component";
+import { FooterComponent } from "./footer/footer.component";
+import { BodyComponent } from "./body/body.component";
+import { MyTableComponent } from "./body/my-table/my-table.component";
+import { MyRowComponent } from "./body/my-table/my-row/my-row.component";
 
 @NgModule({
   declarations: [
@@ -17,10 +17,8 @@ import { MyRowComponent } from './my-row/my-row.component';
     MyTableComponent,
     MyRowComponent
   ],
-  imports: [
-    BrowserModule
-  ],
+  imports: [BrowserModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -28,11 +28,20 @@
         <td> {{applicant.psi}}</td>
         <td> {{applicant.psd}}</td>
         <td>
-          <div class="btn-group">
-            <button type="button" class="btn btn-warning btn-my">Edit</button>
-            <button type="button" class="btn btn-danger btn-my">Delete</button>
+          <!-- <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block">Edit</button>
+          <button type="button" class="btn btn-danger btn-my col-md-6 d-inline-block">Delete</button> -->
+          <div class="dropdown dropright">
+            <button class="btn btn-secondary dropdown-toggle btn-warning btn-my" type="button" id="dropdownMenu2" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Edit
+            </button>
+            <div class="dropdown-menu " aria-labelledby="dropdownMenu2">
+              <button class="dropdown-item" type="button">
+                Delete </button>
+            </div>
           </div>
         </td>
+
       </tr>
     </tbody>
   </table>

@@ -1,0 +1,42 @@
+.btn-my {
+  width: 96px;
+     height: 50px;
+}
+
+.table td,
+.table th
+{
+  vertical-align: middle;
+}
+
+.table thead th {
+  vertical-align: middle;
+}
+
+.table tbody tr td {
+  text-align: center;
+}
+.dropdown-toggle{
+  color: white;
+  font-weight: 600;
+}
+.dropdown-item{
+  color: white;
+  font-weight: 600;
+}
+
+.dropdown-menu{
+  min-width: 6rem;
+}
+.dropdown-menu,
+.dropdown-menu button {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+
+.dropdown-menu:hover,
+.dropdown-menu button:hover
+  {
+  background-color: #d33833;
+  border-color: #d33833;
+}
