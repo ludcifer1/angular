@@ -1,9 +1,9 @@
 <div class="btn-group mb-4" (click)="onCreateApplicant()">
-  <button class="btn btn-danger">Add Applicant</button>
+  <button class="btn btn-success">Add Applicant</button>
 </div>
 
 <div class="table-responsive-xl">
-  <table class="table table-bordered  table-striped">
+  <table class="table table-striped">
     <thead class="thead-dark">
       <tr class="text-center">
         <th scope="col">ID</th>
@@ -14,7 +14,8 @@
         <th scope="col">Phone</th>
         <th scope="col">Phone Screen Interview</th>
         <th scope="col">Phone Screen Date</th>
-        <th scope="col">Action</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -27,10 +28,10 @@
         <td>{{applicant.phone}}</td>
         <td> {{applicant.psi}}</td>
         <td> {{applicant.psd}}</td>
+        <!-- Button part -->
         <td>
-          <!-- <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block">Edit</button>
-          <button type="button" class="btn btn-danger btn-my col-md-6 d-inline-block">Delete</button> -->
-          <div class="dropdown dropright">
+          <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block">Edit</button>
+          <!-- <div class="dropdown dropright">
             <button class="btn btn-secondary dropdown-toggle btn-warning btn-my" type="button" id="dropdownMenu2" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               Edit
@@ -39,7 +40,10 @@
               <button class="dropdown-item" type="button">
                 Delete </button>
             </div>
-          </div>
+          </div> -->
+        </td>
+        <td>
+          <button type="button" class="btn btn-danger btn-my col-md-6 d-inline-block">Delete</button>
         </td>
 
       </tr>
