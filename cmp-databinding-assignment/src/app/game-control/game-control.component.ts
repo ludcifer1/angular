@@ -6,26 +6,23 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
   styleUrls: ["./game-control.component.css"]
 })
 export class GameControlComponent implements OnInit {
-  count = 0;
+  interval;
+  @Output() counting= new EventEmitter<number>();
+  lastCount=0;
 
-  @Output()
-  counting = new EventEmitter<{
-    count: number;
-  }>();
-
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {}
 
-  startCounting() {
-    setInterval(function() {
-      this.count += 1;
-      // this.counting.emit({
-      //   count: this.count
-      // });
-      console.log(this.count);
-    }, 1000);
+  startCounting(){
+    this.interval= setInterval(
+      ()=>{
+        this.counting.emit(this.lastCount+1);
+        this.lastCount++;
+      }
+      ,1000);
   }
+
   stopCounting() {
     // stop interval
   }
