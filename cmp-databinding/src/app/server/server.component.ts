@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, } from "@angular/core";
+yuuaududududuimport { Component, OnInit, Input, Output, } from "@angular/core";
 
 
 @Component({

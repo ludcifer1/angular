@@ -25,5 +25,6 @@ export class GameControlComponent implements OnInit {
 
   stopCounting() {
     // stop interval
+    clearInterval(this.interval);
   }
 }

@@ -6,30 +6,12 @@
 <hr>
 <div class="row">
   <div class="col-xl-12">
-    <a href=# class="list-group-item list-group-item-action clearfix" *ngFor="let recipe of recipes">
-      <div class="float-left">
-        <h4 class="list-group-item-heading">
-          {{recipe.name}}
-        </h4>
-        <p class="list-group-item-text">{{recipe.description}}</p>
-      </div>
-      <span class="float-right">
-        <img [src]="recipe.imagePath" alt="recipe.name" class="img-fluid" style="max-height: 100px;">
-      </span>
+    <!-- Do some Ngfor to loop -->
+    <!-- Received the recipeData and populate it to the List -->
 
-    </a>
-<a href=# class="list-group-item list-group-item-action clearfix" *ngFor="let recipe of recipes">
-      <div class="float-left">
-        <h4 class="list-group-item-heading">
-          {{recipe.name}}
-        </h4>
-        <p class="list-group-item-text">{{recipe.description}}</p>
-      </div>
-      <span class="float-right">
-        <img [src]="recipe.imagePath" alt="recipe.name" class="img-fluid" style="max-height: 100px;">
-      </span>
-
-    </a>
-    <app-recipe-item></app-recipe-item>
+    <app-recipe-item *ngFor="let recipe of recipes"
+    [recipeData]="recipe"
+    (itemClick)="onItemClick($event)"></app-recipe-item>
+    <!-- Set event onItemClick to emit the selected item from recipe Detail -->
   </div>
 </div>
