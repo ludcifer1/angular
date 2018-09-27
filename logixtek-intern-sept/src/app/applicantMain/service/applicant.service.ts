@@ -1,6 +1,9 @@
 import { Applicant } from '../../applicant_data/applicant.model';
 
 export class ApplicantService {
+  // ================================================
+  // =              ATTRIBUTES SECTION              =
+  // ================================================
   applicants: Applicant[] = [
     new Applicant(
       'Adam',
@@ -39,6 +42,9 @@ export class ApplicantService {
       'Mr B'
     )
   ];
+  // Applicant Detail Attribute
+  applyForArr: string[] = ['ASE', 'SE', 'SSE', 'TA'];
+  stageArr: string[] = ['N/A', 'Interviewing', 'Done'];
   // ================================================
   // =              BUSINESS METHODS                =
   // ================================================
