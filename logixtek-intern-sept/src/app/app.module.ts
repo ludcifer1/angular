@@ -1,12 +1,13 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-import { AppComponent } from "./app.component";
-import { HeaderComponent } from "./header/header.component";
-import { FooterComponent } from "./footer/footer.component";
-import { ApplicantMainComponent } from "./applicantMain/applicantMain.component";
-import { ApplicantListComponent } from "./applicantMain/applicant-list/applicant-list.component";
-import { ApplicantItemComponent } from "./applicantMain/applicant-list/applicant-item/applicant-item.component";
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './applicantMain/header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { ApplicantMainComponent } from './applicantMain/applicantMain.component';
+import { ApplicantListComponent } from './applicantMain/applicant-list/applicant-list.component';
+import { ApplicantItemComponent } from './applicantMain/applicant-list/applicant-item/applicant-item.component';
+import { ApplicantDetailComponent } from './applicantMain/applicant-detail/applicant-detail.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ApplicantItemComponent } from "./applicantMain/applicant-list/applicant
     FooterComponent,
     ApplicantMainComponent,
     ApplicantListComponent,
-    ApplicantItemComponent
+    ApplicantItemComponent,
+    ApplicantDetailComponent
   ],
   imports: [BrowserModule],
   providers: [],

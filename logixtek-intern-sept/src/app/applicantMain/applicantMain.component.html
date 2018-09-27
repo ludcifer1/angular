@@ -1,3 +1,4 @@
+<app-header (featureSelected)="onNavigate($event)"></app-header>
 <div class="container">
   <div class="jumbotron jumbotron-fluid bg-info">
     <div class="container">
@@ -5,6 +6,12 @@
       <p class="lead">Logixtek Intern Assignment</p>
     </div>
   </div>
-
-  <app-applicant-list class="mt-2"></app-applicant-list>
+  <app-applicant-list class="mt-2"
+   *ngIf="loadedFeature==='List' "
+   (featureSelected)="onNavigate($event)"
+   ></app-applicant-list>
+  <app-applicant-detail class="mt-2"
+  *ngIf="loadedFeature==='Detail'"
+   (applicantSelected)="onApplicantEdit($event)"
+  ></app-applicant-detail>
 </div>

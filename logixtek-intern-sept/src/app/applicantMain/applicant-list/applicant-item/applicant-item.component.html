@@ -1,10 +1,18 @@
 <tr>
-  <th scope="row">{{id}}</th>
-  <td>{{name}}</td>
-  <td>{{applyFor}}</td>
-  <td>{{stage}}</td>
-  <td>{{email}}</td>
-  <td>{{phone}}</td>
-  <td>{{psi}}</td>
-  <td>{{psd}}</td>
+  <th scope="row">{{i+1}}</th>
+  <td>{{applicantData.name}}</td>
+  <td>{{applicantData.applyFor}}</td>
+  <td>{{applicantData.stage}}</td>
+  <td>{{applicantData.email}}</td>
+  <td>{{applicantData.phone}}</td>
+  <td> {{applicantData.psi}}</td>
+  <td> {{applicantData.psd}}</td>
+  <!-- Button part -->
+  <td>
+    <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block">Edit</button>
+  </td>
+  <td>
+    <button type="button" class="btn btn-danger btn-my col-md-6 d-inline-block">Delete</button>
+  </td>
+
 </tr>

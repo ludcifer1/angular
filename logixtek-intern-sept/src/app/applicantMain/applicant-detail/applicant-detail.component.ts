@@ -1,0 +1,17 @@
+import { Component, OnInit } from "@angular/core";
+import { Applicant } from "../../applicant_data/applicant.model";
+
+@Component({
+  selector: "app-applicant-detail",
+  templateUrl: "./applicant-detail.component.html",
+  styleUrls: ["./applicant-detail.component.css"]
+})
+export class ApplicantDetailComponent implements OnInit {
+  constructor() {}
+
+  ngOnInit() {}
+
+  onApplicantEdit(applicant: Applicant) {
+    console.log(applicant);
+  }
+}

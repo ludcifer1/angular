@@ -1,16 +1,20 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { Applicant } from "../../applicant_data/applicant.model";
-
+import { ApplicantService } from "../service/applicant.service";
 @Component({
   selector: "app-applicant-list",
   templateUrl: "./applicant-list.component.html",
-  styleUrls: ["./applicant-list.component.css"]
+  styleUrls: ["./applicant-list.component.css"],
+  providers: [ApplicantService]
 })
 export class ApplicantListComponent implements OnInit {
-  applicants: Applicant[] = [];
+  @Output()
+  featureSelected = new EventEmitter<string>();
+
+  @Output()
+  applicantSelected = new EventEmitter<Applicant>();
 
   applicantTest = new Applicant(
-    1,
     "Test 1",
     "Something",
     "Interviewing",
@@ -19,12 +23,28 @@ export class ApplicantListComponent implements OnInit {
     "Mr A",
     "Mr B"
   );
+  applicants: Applicant[] = [];
 
-  constructor() {}
+  constructor(private applicantService: ApplicantService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.applicants = this.applicantService.applicants;
+    console.log(this.applicantService.applicants);
+  }
 
-  onCreateApplicant() {
-    this.applicants.push(this.applicantTest);
+  // ================================================
+  // =              BUSINESS METHODS                =
+  // ================================================
+
+  onCreateApplicant(feature: string) {
+    // Navigate to Applicant Detail
+    this.featureSelected.emit(feature);
+  }
+
+  // Edit Applicant
+  getApplicant(id: number, applicant: Applicant) {
+    console.log(applicant);
+    this.onCreateApplicant('Detail');
+    this.applicantSelected.emit(applicant);
   }
 }

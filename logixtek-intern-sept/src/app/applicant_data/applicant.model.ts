@@ -1,25 +1,21 @@
 export class Applicant {
-   id: number=0;
-   name: string = '';
-   applyFor: string = '';
-   stage: string = '';
-   email: string = '';
-   phone: string = '';
-   psi: string = '';
-   psd: string = '';
+   id = 0;
+   name = '';
+   applyFor = '';
+   stage = '';
+   email = '';
+   phone = '';
+   psi = '';
+   psd = '';
 
-   constructor(id:number, name: string, applyFor: string, stage: string, email: string, phone: string, psi: string, psd: string) {
-      this.id=id;
+   constructor(name: string, applyFor: string, stage: string, email: string, phone: string, psi: string, psd: string) {
+
       this.name = name;
       this.applyFor = applyFor;
       this.stage = stage;
       this.email = email;
-      this.phone=phone;
+      this.phone = phone;
       this.psi = psi;
       this.psd = psd;
-   }
-
-   onCreateApplicant(){
-      this.id+=1;
    }
 }
