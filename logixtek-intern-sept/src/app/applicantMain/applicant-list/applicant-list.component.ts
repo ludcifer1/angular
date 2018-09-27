@@ -2,11 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { Applicant } from "../../applicant_data/applicant.model";
 
 @Component({
-  selector: "app-my-table",
-  templateUrl: "./my-table.component.html",
-  styleUrls: ["./my-table.component.css"]
+  selector: "app-applicant-list",
+  templateUrl: "./applicant-list.component.html",
+  styleUrls: ["./applicant-list.component.css"]
 })
-export class MyTableComponent implements OnInit {
+export class ApplicantListComponent implements OnInit {
   applicants: Applicant[] = [];
 
   applicantTest = new Applicant(
