@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
+import { StorageServiceModule } from 'angular-webstorage-service';
+
 import { HeaderComponent } from './applicantMain/header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ApplicantMainComponent } from './applicantMain/applicantMain.component';
@@ -19,7 +21,7 @@ import { ApplicantDetailComponent } from './applicantMain/applicant-detail/appli
     ApplicantItemComponent,
     ApplicantDetailComponent
   ],
-  imports: [BrowserModule],
+  imports: [BrowserModule, FormsModule, StorageServiceModule ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,15 +1,11 @@
-<form class="clearfix">
+<form class="clearfix" (ngSubmit)="onAddApplicant(f,$event)" #f="ngForm">
   <div class="form-group">
     <label for="applicantName" class="font-weight-bold">Applicant's Name: </label>
-<<<<<<< HEAD
-    <input type="text" class="form-control"
-           id="applicantName"
-             [value]="formData.name"
-           >
+    <input type="text" class="form-control" id="applicantName" name="name" ngModel>
   </div>
   <div class="form-group">
     <label for="applyFor" class="font-weight-bold">Apply for: </label>
-    <select class=" form-control" id="applyFor" [value]="formData.applyFor">
+    <select class=" form-control" id="applyFor" name="applyFor" ngModel>
       //Temporary Loaded > move to Array for NGfor usage later
       <option *ngFor="
       let applyFor of forArr">{{applyFor}}</option>
@@ -19,28 +15,26 @@
   <div class="form-group">
     <label for="stage" class="font-weight-bold">Stage: </label>
 
-    <select class="form-control" id="stage" [value]="formData.stage">
+    <select class="form-control" id="stage" name="stage" ngModel>
       //Temporary Loaded > move to Array for NGfor usage later
       <option *ngFor="let stage of stageArr">{{stage}}</option>
-
-
     </select>
   </div>
   <div class="form-group">
     <label for="email" class="font-weight-bold">Email: </label>
-    <input type="email" class="form-control" id="email" [value]="formData.email">
+    <input type="email" class="form-control" id="email" name="email" ngModel>
   </div>
   <div class="form-group">
     <label for="phone" class="font-weight-bold">Phone: </label>
-    <input type="text" class="form-control" id="phone" [value]="formData.phone">
+    <input type="text" class="form-control" id="phone" name="phone" ngModel>
   </div>
   <div class="form-group">
     <label for="psi" class="font-weight-bold">Phone Screen Interviewer: </label>
-    <input type="text" class="form-control" id="psi" [value]="formData.psi">
+    <input type="text" class="form-control" id="psi" name="psi" ngModel>
   </div>
   <div class="form-group">
     <label for="psd" class="font-weight-bold">Phone Screen Date: </label>
-    <input type="date" class="form-control" id="psd" [value]="formData.psd">
+    <input type="date" class="form-control" id="psd" name="psd" ngModel>
   </div>
   <div class="row float-right mb-4">
     <button class="btn btn-success mr-2" type="submit"> Add Applicant </button>
