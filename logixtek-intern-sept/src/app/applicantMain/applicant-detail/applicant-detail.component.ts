@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Input } from "@angular/core";
 import { Applicant } from "../../applicant_data/applicant.model";
 import { ApplicantService } from "../service/applicant.service";
@@ -20,6 +21,7 @@ export class ApplicantDetailComponent implements OnInit {
   ngOnInit() {
     this.forArr = this.applicantService.applyForArr;
     this.stageArr = this.applicantService.stageArr;
+
   }
 
   // onApplicantEdit(applicant: Applicant) {
