@@ -9,7 +9,6 @@ export class Applicant {
    psd = '';
 
    constructor(name: string, applyFor: string, stage: string, email: string, phone: string, psi: string, psd: string) {
-
       this.name = name;
       this.applyFor = applyFor;
       this.stage = stage;

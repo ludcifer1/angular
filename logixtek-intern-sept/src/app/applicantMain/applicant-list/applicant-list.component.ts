@@ -1,10 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { Applicant } from "../../applicant_data/applicant.model";
-import { ApplicantService } from "../service/applicant.service";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Applicant } from '../../applicant_data/applicant.model';
+import { ApplicantService } from '../service/applicant.service';
 @Component({
-  selector: "app-applicant-list",
-  templateUrl: "./applicant-list.component.html",
-  styleUrls: ["./applicant-list.component.css"],
+  selector: 'app-applicant-list',
+  templateUrl: './applicant-list.component.html',
+  styleUrls: ['./applicant-list.component.css'],
   providers: [ApplicantService]
 })
 export class ApplicantListComponent implements OnInit {
@@ -15,13 +15,13 @@ export class ApplicantListComponent implements OnInit {
   applicantSelected = new EventEmitter<Applicant>();
 
   applicantTest = new Applicant(
-    "Test 1",
-    "Something",
-    "Interviewing",
-    "Testsubject@logixtek.com",
-    "0111001100",
-    "Mr A",
-    "Mr B"
+    'Test 1',
+    'Something',
+    'Interviewing',
+    'Testsubject@logixtek.com',
+    '0111001100',
+    'Mr A',
+    'Mr B'
   );
   applicants: Applicant[] = [];
 
@@ -43,7 +43,6 @@ export class ApplicantListComponent implements OnInit {
 
   // Edit Applicant
   getApplicant(id: number, applicant: Applicant) {
-    console.log(applicant);
     this.onCreateApplicant('Detail');
     this.applicantSelected.emit(applicant);
   }

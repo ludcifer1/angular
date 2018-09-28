@@ -6,12 +6,15 @@
       <p class="lead">Logixtek Intern Assignment</p>
     </div>
   </div>
+
   <app-applicant-list class="mt-2"
    *ngIf="loadedFeature==='List' "
    (featureSelected)="onNavigate($event)"
+   (applicantSelected)="onApplicantSelected($event)"
    ></app-applicant-list>
+
   <app-applicant-detail class="mt-2"
   *ngIf="loadedFeature==='Detail'"
-   (applicantSelected)="onApplicantEdit($event)"
+  [formData]="applicantSelected"
   ></app-applicant-detail>
 </div>

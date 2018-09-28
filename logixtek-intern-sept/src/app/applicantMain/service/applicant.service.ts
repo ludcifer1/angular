@@ -1,4 +1,7 @@
 import { Applicant } from '../../applicant_data/applicant.model';
+// ================================================
+// =              ATTRIBUTES SECTION              =
+// ================================================
 
 export class ApplicantService {
   applicants: Applicant[] = [
@@ -39,6 +42,11 @@ export class ApplicantService {
       'Mr B'
     )
   ];
+  // ===============================================
+  //
+  applyForArr: String[] = ['ASE', 'SE', 'SSE', 'TA'];
+  stageArr: String[] = ['N/A', 'Interviewing', 'Done'];
+
   // ================================================
   // =              BUSINESS METHODS                =
   // ================================================
