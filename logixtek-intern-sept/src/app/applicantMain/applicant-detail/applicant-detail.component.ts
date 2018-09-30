@@ -41,7 +41,6 @@ export class ApplicantDetailComponent implements OnInit {
       value.psi,
       value.psd
     );
-
     // this.applicantService.addApplicant(newApplicantData);
 
     this.applicantService.storeOnLocalStorage(newApplicantData);
@@ -54,6 +53,9 @@ export class ApplicantDetailComponent implements OnInit {
     this.formSubmit.emit();
     event.preventDefault();
   }
-
+  onCancel(event: Event) {
+    this.formSubmit.emit();
+    event.preventDefault();
+  }
 
 }
