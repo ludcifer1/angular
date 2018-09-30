@@ -36,7 +36,9 @@
           >Edit</button>
         </td>
         <td>
-          <button type="button" class="btn btn-danger btn-my col-md-6 d-inline-block">Delete</button>
+          <button type="button" class="btn btn-danger btn-my col-md-6 d-inline-block"
+          (click)="deleteApplicant(i+1)"
+          >Delete</button>
         </td>
       </tr>
     </tbody>

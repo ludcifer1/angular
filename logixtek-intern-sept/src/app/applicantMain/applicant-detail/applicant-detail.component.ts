@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { Applicant } from "../../applicant_data/applicant.model";
-import { ApplicantService } from "../service/applicant.service";
-import { NgForm } from "@angular/forms";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Applicant } from '../../applicant_data/applicant.model';
+import { ApplicantService } from '../service/applicant.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: "app-applicant-detail",
-  templateUrl: "./applicant-detail.component.html",
-  styleUrls: ["./applicant-detail.component.css"],
+  selector: 'app-applicant-detail',
+  templateUrl: './applicant-detail.component.html',
+  styleUrls: ['./applicant-detail.component.css'],
   providers: [ApplicantService]
 })
 export class ApplicantDetailComponent implements OnInit {

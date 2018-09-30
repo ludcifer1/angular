@@ -1,10 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
-import { Applicant } from "../../applicant_data/applicant.model";
-import { ApplicantService } from "../service/applicant.service";
+import { Component, OnInit, Output, EventEmitter, Input,} from '@angular/core';
+import { Applicant } from '../../applicant_data/applicant.model';
+import { ApplicantService } from '../service/applicant.service';
 @Component({
-  selector: "app-applicant-list",
-  templateUrl: "./applicant-list.component.html",
-  styleUrls: ["./applicant-list.component.css"],
+  selector: 'app-applicant-list',
+  templateUrl: './applicant-list.component.html',
+  styleUrls: ['./applicant-list.component.css'],
   providers: [ApplicantService]
 })
 export class ApplicantListComponent implements OnInit {
@@ -28,11 +28,11 @@ export class ApplicantListComponent implements OnInit {
   // );
   applicants: Applicant[] = [];
 
-  constructor(private applicantService: ApplicantService) {}
+  constructor(private applicantService: ApplicantService) { }
 
   ngOnInit() {
     // this.applicants = this.applicantService.getApplicant();
-    this.applicants = this.applicantService.getApplicant();
+    this.applicants = this.applicantService.getApplicants();
   }
 
   // ================================================
@@ -41,10 +41,18 @@ export class ApplicantListComponent implements OnInit {
 
   // Edit Applicant
   getApplicant(id: number, applicant: Applicant) {
+    console.log(id, applicant);
+
     this.applicantSelected.emit(applicant);
   }
 
   onAddApplicant() {
     this.addApplicant.emit();
   }
+
+  deleteApplicant(index: number) {
+    console.log('Del running');
+    this.applicantService.deleteApplicant(index);
+  }
+
 }
