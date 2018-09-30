@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Applicant } from '../applicant_data/applicant.model';
+import { ApplicantService } from '../applicantMain/service/applicant.service';
 
 @Component({
   selector: 'app-applicantMain',
   templateUrl: './applicantMain.component.html',
-  styleUrls: ['./applicantMain.component.css']
+  styleUrls: ['./applicantMain.component.css'],
+  providers: [ApplicantService]
+
 })
 export class ApplicantMainComponent implements OnInit {
 
@@ -14,14 +17,15 @@ export class ApplicantMainComponent implements OnInit {
 
   loadedFeature = 'List';
   applicantSelected: Applicant;
+  formData: Applicant;
 
   // ================================================
   // =             CONSTRUCTOR SECTION              =
   // ================================================
 
-  constructor() {}
+  constructor(private applicantService: ApplicantService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
 
   // ================================================
@@ -33,7 +37,14 @@ export class ApplicantMainComponent implements OnInit {
   }
 
   onApplicantSelected(applicant: Applicant) {
+    // this.applicantSelected = this.applicantService.selectApplicant(index);
     this.applicantSelected = applicant;
+    console.log('Main', this.applicantSelected);
+    // console.log('--------');
+    // console.log(index);
+    // console.log(this.applicantService.selectApplicant(index));
+    // console.log('--------');
+    // console.log('Applicant Selected from List: ', this.applicantSelected);
     this.loadedFeature = 'Detail';
 
     // todo: set form status to edit

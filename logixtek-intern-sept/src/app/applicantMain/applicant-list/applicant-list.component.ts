@@ -56,6 +56,9 @@ export class ApplicantListComponent implements OnInit {
 
   onUpdateApplicant(index: number) {
     console.log('update runnin ', index);
-    this.applicantService.updateApplicant(index);
+    const tempApplicant = this.applicantService.selectApplicant(index);
+    tempApplicant.id = index;
+    console.log(tempApplicant);
+    this.applicantSelected.emit(tempApplicant);
   }
 }
