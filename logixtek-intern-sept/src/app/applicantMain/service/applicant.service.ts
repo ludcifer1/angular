@@ -74,8 +74,13 @@ export class ApplicantService {
   addApplicant(applicant: Applicant) {
     this.applicants.push(applicant);
   }
-  updateApplicant(id: number, applicant: Applicant) {
-    this.applicants[id] = applicant;
+  updateApplicant(index: number) {
+    console.log('update Service ', index);
+    // Get  the current applicant array from local storage
+    const temp = this.storage.get(STORAGE_KEY);
+    const tempApplicant = temp[index - 1];
+    console.log(tempApplicant);
+    // Do update
   }
   getApplicants() {
     return this.storage.get(STORAGE_KEY);

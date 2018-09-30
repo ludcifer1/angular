@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input,} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, } from '@angular/core';
 import { Applicant } from '../../applicant_data/applicant.model';
 import { ApplicantService } from '../service/applicant.service';
 @Component({
@@ -51,8 +51,11 @@ export class ApplicantListComponent implements OnInit {
   }
 
   deleteApplicant(index: number) {
-    console.log('Del running');
     this.applicantService.deleteApplicant(index);
   }
 
+  onUpdateApplicant(index: number) {
+    console.log('update runnin ', index);
+    this.applicantService.updateApplicant(index);
+  }
 }
