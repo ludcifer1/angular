@@ -19,7 +19,7 @@ export class ApplicantDetailComponent implements OnInit {
   forArr: String[];
   stageArr: String[];
 
-  constructor(private applicantService: ApplicantService) {}
+  constructor(private applicantService: ApplicantService) { }
 
   ngOnInit() {
     this.forArr = this.applicantService.applyForArr;
@@ -49,4 +49,11 @@ export class ApplicantDetailComponent implements OnInit {
 
     event.preventDefault();
   }
+  onSubmitApplicant(event: Event) {
+    this.applicantService.updateApplicant(this.formData);
+    this.formSubmit.emit();
+    event.preventDefault();
+  }
+
+
 }

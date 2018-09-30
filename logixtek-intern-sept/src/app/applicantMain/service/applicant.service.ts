@@ -82,7 +82,16 @@ export class ApplicantService {
     // Do update
     return tempApplicant;
   }
-
+  updateApplicant(applicant: Applicant) {
+    const id = applicant.id;
+    let tempApplicant = this.selectApplicant(id - 1);
+    tempApplicant = applicant;
+    // replace
+    const temp = this.storage.get(STORAGE_KEY);
+    temp[id - 1] = tempApplicant;
+    this.storage.set(STORAGE_KEY, temp);
+    console.log(this.storage);
+  }
 
 
   getApplicants() {

@@ -37,7 +37,10 @@
     <input type="date" class="form-control" id="psd" name="psd" [(ngModel)]="formData.psd">
   </div>
   <div class="row float-right mb-4">
-    <button class="btn btn-success mr-2" type="submit"> Add Applicant </button>
+    <button class="btn btn-success mr-2" type="submit" *ngIf="formData.id === 0 else edit"> Add Applicant </button>
+    <ng-template #edit>
+      <button class="btn btn-warning mr-2" type="button" (click)='onSubmitApplicant($event)' > Submit Edit </button>
+    </ng-template>
     <button class="btn btn-danger" type="button"> Cancel </button>
   </div>
 </form>
