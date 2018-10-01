@@ -52,6 +52,8 @@ export class ApplicantListComponent implements OnInit {
 
   deleteApplicant(index: number) {
     this.applicantService.deleteApplicant(index);
+    // Reload the list
+    this.applicants = this.applicantService.getApplicants();
   }
 
   onUpdateApplicant(index: number) {

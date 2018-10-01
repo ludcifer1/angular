@@ -97,6 +97,7 @@ export class ApplicantService {
   getApplicants() {
     return this.storage.get(STORAGE_KEY);
   }
+
   deleteApplicant(index: number) {
     console.log('Delte Service running');
     console.log('before:', this.storage);
