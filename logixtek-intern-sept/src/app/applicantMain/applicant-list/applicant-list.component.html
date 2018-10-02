@@ -19,7 +19,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let applicant of applicants let i =index">
-        <th scope="row">{{i+1}}</th>
+        <th scope="row">{{applicant.id}}</th>
         <td>{{applicant.name}}</td>
         <td>{{applicant.applyFor}}</td>
         <td>{{applicant.stage}}</td>

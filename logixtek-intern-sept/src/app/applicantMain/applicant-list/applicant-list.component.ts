@@ -1,10 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Applicant } from '../../applicant_data/applicant.model';
-import { ApplicantService } from '../service/applicant.service';
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
+import { Applicant } from "../../applicant_data/applicant.model";
+import { ApplicantService } from "../service/applicant.service";
 @Component({
-  selector: 'app-applicant-list',
-  templateUrl: './applicant-list.component.html',
-  styleUrls: ['./applicant-list.component.css'],
+  selector: "app-applicant-list",
+  templateUrl: "./applicant-list.component.html",
+  styleUrls: ["./applicant-list.component.css"],
   providers: [ApplicantService]
 })
 export class ApplicantListComponent implements OnInit {
@@ -27,15 +27,14 @@ export class ApplicantListComponent implements OnInit {
   //   'Mr B'
   // );
   applicants: Applicant[] = [];
-  applicantsLength: number;
+  nextId = 0;
 
   constructor(private applicantService: ApplicantService) {}
 
   ngOnInit() {
     // this.applicants = this.applicantService.getApplicant();
     this.applicants = this.applicantService.getApplicants();
-    console.log('list lenght');
-    console.log(this.applicants.length);
+    console.log(this.applicants);
   }
 
   // ================================================
@@ -44,17 +43,21 @@ export class ApplicantListComponent implements OnInit {
 
   // Edit Applicant
   getApplicant(id: number, applicant: Applicant) {
-    console.log(id, applicant);
-
     this.applicantSelected.emit(applicant);
   }
 
   onAddApplicant() {
-    const nextId = this.applicants.length;
-    console.log('id: ' + nextId);
-
-    this.addApplicant.emit(nextId);
-    console.log('list' + nextId);
+    // if (this.applicants[0] === undefined) {
+    //   nextId = 1;
+    //   console.log('if here');
+    // } else if (
+    //   nextId === this.applicants[nextId - 1].id &&
+    //   nextId === this.applicants[nextId].id
+    // ) {
+    //   console.log('else here');
+    //   nextId += 1;
+    // }
+    this.addApplicant.emit();
   }
 
   deleteApplicant(index: number) {
@@ -64,10 +67,8 @@ export class ApplicantListComponent implements OnInit {
   }
 
   onUpdateApplicant(index: number) {
-    console.log('update runnin ', index);
     const tempApplicant = this.applicantService.selectApplicant(index);
     tempApplicant.id = index;
-    console.log(tempApplicant);
     this.applicantSelected.emit(tempApplicant);
   }
 }

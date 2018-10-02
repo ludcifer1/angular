@@ -9,7 +9,7 @@
   <app-applicant-list class="mt-2"
    *ngIf="loadedFeature === 'List' "
    (applicantSelected)="onApplicantSelected($event)"
-   (addApplicant)="onAddApplicant($event)"
+   (addApplicant)="onAddApplicant()"
    ></app-applicant-list>
 
   <app-applicant-detail class="mt-2"

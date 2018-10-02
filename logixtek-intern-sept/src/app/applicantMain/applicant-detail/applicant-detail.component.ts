@@ -21,7 +21,7 @@ export class ApplicantDetailComponent implements OnInit {
 
   forArr: String[];
   stageArr: String[];
-
+  nextId = 0;
   constructor(private applicantService: ApplicantService) {}
 
   ngOnInit() {
@@ -29,14 +29,11 @@ export class ApplicantDetailComponent implements OnInit {
     this.stageArr = this.applicantService.stageArr;
   }
 
-  // onApplicantEdit(applicant: Applicant) {
-  //   console.log(applicant);
-  //   console.log("Applicant edit");
-  // }
-  onAddApplicant(id: number, form: NgForm, event: Event) {
+  onAddApplicant(form: NgForm, event: Event) {
+    console.log("on Add applicant");
     const value = form.value;
     const newApplicantData = new Applicant(
-      (value.id = id),
+      (value.id = this.formData.id),
       value.name,
       value.applyFor,
       value.stage,
@@ -46,12 +43,11 @@ export class ApplicantDetailComponent implements OnInit {
       value.psd
     );
     // this.applicantService.addApplicant(newApplicantData);
-      console.log(id, newApplicantData);
+    console.log("add here");
+    console.log(this.formData.id, newApplicantData);
 
     this.applicantService.storeOnLocalStorage(newApplicantData);
     this.formSubmit.emit();
-      console.log(this.applicantService.getApplicants);
-
     event.preventDefault();
   }
   onSubmitApplicant(event: Event) {
@@ -62,6 +58,7 @@ export class ApplicantDetailComponent implements OnInit {
   onCancel(event: Event) {
     this.formSubmit.emit();
     event.preventDefault();
+    this.modeData = "new";
   }
   checkMode() {
     if (this.modeData === "new") {
