@@ -9,12 +9,13 @@
   <app-applicant-list class="mt-2"
    *ngIf="loadedFeature === 'List' "
    (applicantSelected)="onApplicantSelected($event)"
-   (addApplicant)="onAddApplicant()"
+   (addApplicant)="onAddApplicant($event)"
    ></app-applicant-list>
 
   <app-applicant-detail class="mt-2"
   *ngIf="loadedFeature ==='Detail'"
   [formData]="applicantSelected"
+  [modeData]="modeData"
   (formSubmit)="onApplicantDetailSubmit($event)"
   ></app-applicant-detail>
 </div>

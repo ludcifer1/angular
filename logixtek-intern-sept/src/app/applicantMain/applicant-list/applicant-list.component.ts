@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Applicant } from '../../applicant_data/applicant.model';
 import { ApplicantService } from '../service/applicant.service';
 @Component({
@@ -27,12 +27,15 @@ export class ApplicantListComponent implements OnInit {
   //   'Mr B'
   // );
   applicants: Applicant[] = [];
+  applicantsLength: number;
 
-  constructor(private applicantService: ApplicantService) { }
+  constructor(private applicantService: ApplicantService) {}
 
   ngOnInit() {
     // this.applicants = this.applicantService.getApplicant();
     this.applicants = this.applicantService.getApplicants();
+    console.log('list lenght');
+    console.log(this.applicants.length);
   }
 
   // ================================================
@@ -47,7 +50,11 @@ export class ApplicantListComponent implements OnInit {
   }
 
   onAddApplicant() {
-    this.addApplicant.emit();
+    const nextId = this.applicants.length;
+    console.log('id: ' + nextId);
+
+    this.addApplicant.emit(nextId);
+    console.log('list' + nextId);
   }
 
   deleteApplicant(index: number) {

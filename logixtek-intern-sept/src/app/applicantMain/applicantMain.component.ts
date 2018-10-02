@@ -7,10 +7,8 @@ import { ApplicantService } from '../applicantMain/service/applicant.service';
   templateUrl: './applicantMain.component.html',
   styleUrls: ['./applicantMain.component.css'],
   providers: [ApplicantService]
-
 })
 export class ApplicantMainComponent implements OnInit {
-
   // ================================================
   // =              ATTRIBUTES SECTION              =
   // ================================================
@@ -18,15 +16,14 @@ export class ApplicantMainComponent implements OnInit {
   loadedFeature = 'List';
   applicantSelected: Applicant;
   formData: Applicant;
-
+  modeData = 'new';
   // ================================================
   // =             CONSTRUCTOR SECTION              =
   // ================================================
 
-  constructor(private applicantService: ApplicantService) { }
+  constructor(private applicantService: ApplicantService) {}
 
-  ngOnInit() { }
-
+  ngOnInit() {}
 
   // ================================================
   // =                EVENT SECTION                 =
@@ -45,18 +42,19 @@ export class ApplicantMainComponent implements OnInit {
     // console.log(this.applicantService.selectApplicant(index));
     // console.log('--------');
     // console.log('Applicant Selected from List: ', this.applicantSelected);
+    this.modeData = 'edit';
     this.loadedFeature = 'Detail';
 
     // todo: set form status to edit
   }
 
-  onAddApplicant() {
-    this.applicantSelected = new Applicant('', '', '', '', '', '', '');
+  onAddApplicant(id: number) {
+    this.applicantSelected = new Applicant(id + 1, '', '', '', '', '', '', '');
+    this.modeData = 'new';
     this.loadedFeature = 'Detail';
 
     // todo: set form status to add new
   }
-
 
   onApplicantDetailSubmit() {
     this.loadedFeature = 'List';

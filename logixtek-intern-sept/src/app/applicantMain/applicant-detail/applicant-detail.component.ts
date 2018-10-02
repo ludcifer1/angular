@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Applicant } from '../../applicant_data/applicant.model';
-import { ApplicantService } from '../service/applicant.service';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Applicant } from "../../applicant_data/applicant.model";
+import { ApplicantService } from "../service/applicant.service";
+import { NgForm } from "@angular/forms";
 
 @Component({
-  selector: 'app-applicant-detail',
-  templateUrl: './applicant-detail.component.html',
-  styleUrls: ['./applicant-detail.component.css'],
+  selector: "app-applicant-detail",
+  templateUrl: "./applicant-detail.component.html",
+  styleUrls: ["./applicant-detail.component.css"],
   providers: [ApplicantService]
 })
 export class ApplicantDetailComponent implements OnInit {
@@ -16,10 +16,13 @@ export class ApplicantDetailComponent implements OnInit {
   @Output()
   formSubmit = new EventEmitter<Applicant>();
 
+  @Input()
+  modeData: string;
+
   forArr: String[];
   stageArr: String[];
 
-  constructor(private applicantService: ApplicantService) { }
+  constructor(private applicantService: ApplicantService) {}
 
   ngOnInit() {
     this.forArr = this.applicantService.applyForArr;
@@ -30,9 +33,10 @@ export class ApplicantDetailComponent implements OnInit {
   //   console.log(applicant);
   //   console.log("Applicant edit");
   // }
-  onAddApplicant(form: NgForm, event: Event) {
+  onAddApplicant(id: number, form: NgForm, event: Event) {
     const value = form.value;
     const newApplicantData = new Applicant(
+      (value.id = id),
       value.name,
       value.applyFor,
       value.stage,
@@ -42,9 +46,11 @@ export class ApplicantDetailComponent implements OnInit {
       value.psd
     );
     // this.applicantService.addApplicant(newApplicantData);
+      console.log(id, newApplicantData);
 
     this.applicantService.storeOnLocalStorage(newApplicantData);
     this.formSubmit.emit();
+      console.log(this.applicantService.getApplicants);
 
     event.preventDefault();
   }
@@ -57,5 +63,11 @@ export class ApplicantDetailComponent implements OnInit {
     this.formSubmit.emit();
     event.preventDefault();
   }
-
+  checkMode() {
+    if (this.modeData === "new") {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
