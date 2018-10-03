@@ -1,5 +1,13 @@
 <div class="btn-group mb-4">
-<button class="btn btn-success" (click)="onAddApplicant( )">Add Applicant</button>
+  <button class="btn btn-success" (click)="onAddApplicant( )">Add Applicant</button>
+</div>
+<div class="container">
+  <div class="alert alert-danger" *ngIf="alertStatus==='delete'">
+    <strong>Deleted !</strong> Applicant delete success.
+  </div>
+  <div class="alert alert-success" *ngIf="alertStatus==='update'">
+    <strong>Updated !</strong> Applicant update success.
+  </div>
 </div>
 <div class="table-responsive-xl">
   <table class="table table-striped">
@@ -33,14 +41,10 @@
           <!-- <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block"
           (click)="getApplicant(i+1,applicant)"
           >Edit</button> -->
-          <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block"
-          (click)="onUpdateApplicant(i+1)"
-          >Edit</button>
+          <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block" (click)="onUpdateApplicant(i+1)">Edit</button>
         </td>
         <td>
-          <button type="button" class="btn btn-danger btn-my col-md-6 d-inline-block"
-          (click)="deleteApplicant(i+1)"
-          >Delete</button>
+          <button type="button" class="btn btn-danger btn-my col-md-6 d-inline-block" (click)="deleteApplicant(i+1)">Delete</button>
         </td>
       </tr>
     </tbody>

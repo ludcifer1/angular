@@ -20,6 +20,7 @@ export class ApplicantMainComponent implements OnInit {
   id: number;
   len: number;
   applicants: Applicant[];
+  setAlertStatus = "";
   // ================================================
   // =             CONSTRUCTOR SECTION              =
   // ================================================
@@ -77,6 +78,8 @@ export class ApplicantMainComponent implements OnInit {
   }
 
   onApplicantDetailSubmit() {
+    console.log("update ne");
     this.loadedFeature = "List";
+    this.setAlertStatus = "update";
   }
 }

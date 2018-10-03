@@ -1,10 +1,10 @@
-import { Applicant } from '../../applicant_data/applicant.model';
-import { Inject, Injectable } from '@angular/core';
-import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
+import { Applicant } from "../../applicant_data/applicant.model";
+import { Inject, Injectable } from "@angular/core";
+import { SESSION_STORAGE, StorageService } from "angular-webstorage-service";
 // ================================================
 // =              ATTRIBUTES SECTION              =
 // ================================================
-const STORAGE_KEY = 'local_applicant_list';
+const STORAGE_KEY = "local_applicant_list";
 @Injectable()
 export class ApplicantService {
   // ================================================
@@ -15,52 +15,51 @@ export class ApplicantService {
   applicants: Applicant[] = [
     new Applicant(
       1,
-      'Adam',
-      'SE',
-      'Interviewing',
-      'Testsubject@logixtek.com',
-      '0111001100',
-      'Mr A',
-      'Mr B'
+      "Adam",
+      "SE",
+      "Interviewing",
+      "Testsubject@logixtek.com",
+      "0111001100",
+      "Mr A",
+      "Mr B"
     ),
     new Applicant(
       2,
-      'Eva',
-      'ASE',
-      'Interviewing',
-      'Testsubject@logixtek.com',
-      '0111001100',
-      'Mr A',
-      'Mr B'
+      "Eva",
+      "ASE",
+      "Interviewing",
+      "Testsubject@logixtek.com",
+      "0111001100",
+      "Mr A",
+      "Mr B"
     ),
     new Applicant(
       3,
-      'Simba',
-      'ASE',
-      'Interviewing',
-      'Testsubject@logixtek.com',
-      '0111001100',
-      'Mr A',
-      'Mr B'
+      "Simba",
+      "ASE",
+      "Interviewing",
+      "Testsubject@logixtek.com",
+      "0111001100",
+      "Mr A",
+      "Mr B"
     ),
     new Applicant(
       4,
-      'Putang',
-      'SE',
-      'Interviewing',
-      'Testsubject@logixtek.com',
-      '0111001100',
-      'Mr A',
-      'Mr B'
+      "Putang",
+      "SE",
+      "Interviewing",
+      "Testsubject@logixtek.com",
+      "0111001100",
+      "Mr A",
+      "Mr B"
     )
   ];
   // ===============================================
   //
-  applyForArr: String[] = ['ASE', 'SE', 'SSE', 'TA'];
-  stageArr: String[] = ['N/A', 'Interviewing', 'Done'];
+  applyForArr: String[] = ["ASE", "SE", "SSE", "TA"];
+  stageArr: String[] = ["N/A", "Interviewing", "Done"];
 
-  constructor(@Inject(SESSION_STORAGE) private storage: StorageService) {
-  }
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService) {}
   // ================================================
   // =              BUSINESS METHODS                =
   // ================================================
@@ -71,14 +70,14 @@ export class ApplicantService {
     currentApplicants.push(applicant);
     // insert updated arr to local storage
     this.storage.set(STORAGE_KEY, currentApplicants);
-    console.log(this.storage.get(STORAGE_KEY) || 'LocaL storage is empty');
+    console.log(this.storage.get(STORAGE_KEY) || "LocaL storage is empty");
   }
   // =================================================
   addApplicant(applicant: Applicant) {
     this.applicants.push(applicant);
   }
   selectApplicant(index: number) {
-    console.log('update Service ', index);
+    console.log("update Service ", index);
     // Get  the current applicant array from local storage
     const temp = this.storage.get(STORAGE_KEY);
     const tempApplicant = temp[index - 1];
@@ -97,17 +96,20 @@ export class ApplicantService {
   }
 
   getApplicants() {
-    return this.storage.get(STORAGE_KEY);
+    if (this.storage.get(STORAGE_KEY) === null) {
+      return [];
+    } else {
+      return this.storage.get(STORAGE_KEY);
+    }
   }
 
   deleteApplicant(index: number) {
-    console.log('Delte Service running');
-    console.log('before:', this.storage);
+    console.log("Delte Service running");
+    console.log("before:", this.storage);
     const temp = this.storage.get(STORAGE_KEY);
     temp.splice(index - 1, 1);
     this.storage.set(STORAGE_KEY, temp);
     console.log(this.storage);
   }
   // ================================================
-
 }

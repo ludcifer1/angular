@@ -10,6 +10,7 @@
    *ngIf="loadedFeature === 'List' "
    (applicantSelected)="onApplicantSelected($event)"
    (addApplicant)="onAddApplicant()"
+   [alertStatus]="setAlertStatus"
    ></app-applicant-list>
 
   <app-applicant-detail class="mt-2"

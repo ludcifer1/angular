@@ -10,6 +10,9 @@ import { ApplicantMainComponent } from './applicantMain/applicantMain.component'
 import { ApplicantListComponent } from './applicantMain/applicant-list/applicant-list.component';
 import { ApplicantItemComponent } from './applicantMain/applicant-list/applicant-item/applicant-item.component';
 import { ApplicantDetailComponent } from './applicantMain/applicant-detail/applicant-detail.component';
+import { ConfirmationDialogComponent } from './utils/confirmation-dialog/confirmation-dialog.component';
+import { ConfirmationDialogService } from './utils/confirmation-dialog/confirmation-dialog.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -19,10 +22,12 @@ import { ApplicantDetailComponent } from './applicantMain/applicant-detail/appli
     ApplicantMainComponent,
     ApplicantListComponent,
     ApplicantItemComponent,
-    ApplicantDetailComponent
+    ApplicantDetailComponent,
+    ConfirmationDialogComponent
   ],
-  imports: [BrowserModule, FormsModule, StorageServiceModule ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, FormsModule, StorageServiceModule, NgbModule.forRoot()],
+  providers: [ConfirmationDialogService],
+  bootstrap: [AppComponent],
+  entryComponents: [ConfirmationDialogComponent]
 })
 export class AppModule {}

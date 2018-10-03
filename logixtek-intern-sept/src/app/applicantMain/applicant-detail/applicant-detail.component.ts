@@ -1,12 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { Applicant } from "../../applicant_data/applicant.model";
-import { ApplicantService } from "../service/applicant.service";
-import { NgForm } from "@angular/forms";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Applicant } from '../../applicant_data/applicant.model';
+import { ApplicantService } from '../service/applicant.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: "app-applicant-detail",
-  templateUrl: "./applicant-detail.component.html",
-  styleUrls: ["./applicant-detail.component.css"],
+  selector: 'app-applicant-detail',
+  templateUrl: './applicant-detail.component.html',
+  styleUrls: ['./applicant-detail.component.css'],
   providers: [ApplicantService]
 })
 export class ApplicantDetailComponent implements OnInit {
@@ -30,7 +30,7 @@ export class ApplicantDetailComponent implements OnInit {
   }
 
   onAddApplicant(form: NgForm, event: Event) {
-    console.log("on Add applicant");
+    console.log('on Add applicant');
     const value = form.value;
     const newApplicantData = new Applicant(
       (value.id = this.formData.id),
@@ -43,7 +43,7 @@ export class ApplicantDetailComponent implements OnInit {
       value.psd
     );
     // this.applicantService.addApplicant(newApplicantData);
-    console.log("add here");
+    console.log('add here');
     console.log(this.formData.id, newApplicantData);
 
     this.applicantService.storeOnLocalStorage(newApplicantData);
@@ -58,10 +58,10 @@ export class ApplicantDetailComponent implements OnInit {
   onCancel(event: Event) {
     this.formSubmit.emit();
     event.preventDefault();
-    this.modeData = "new";
+    this.modeData = 'new';
   }
   checkMode() {
-    if (this.modeData === "new") {
+    if (this.modeData === 'new') {
       return true;
     } else {
       return false;
