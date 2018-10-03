@@ -80,6 +80,6 @@ export class ApplicantMainComponent implements OnInit {
   onApplicantDetailSubmit() {
     console.log("update ne");
     this.loadedFeature = "List";
-    this.setAlertStatus = "update";
+    // this.setAlertStatus = "update";
   }
 }
