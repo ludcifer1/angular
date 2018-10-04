@@ -8,6 +8,11 @@ const STORAGE_KEY = 'local_applicant_list';
 @Injectable()
 export class ApplicantService {
   // ================================================
+  // =             CONSTRUCTOR SECTION              =
+  // ================================================
+
+  constructor(@Inject(SESSION_STORAGE) private storage: StorageService) {}
+  // ================================================
   // =              ATTRIBUTES SECTION              =
   // ================================================
   anotherapplicantList: Applicant[] = [];
@@ -58,11 +63,12 @@ export class ApplicantService {
   //
   applyForArr: String[] = ['ASE', 'SE', 'SSE', 'TA'];
   stageArr: String[] = ['N/A', 'Interviewing', 'Done'];
+  tempApplicant: Applicant;
 
-  constructor(@Inject(SESSION_STORAGE) private storage: StorageService) {}
   // ================================================
-  // =              BUSINESS METHODS                =
+  // =              LOCAL STORAGE                   =
   // ================================================
+
   public storeOnLocalStorage(applicant: Applicant): void {
     // Get Applicant Array from local storage
     const currentApplicants = this.storage.get(STORAGE_KEY) || [];
@@ -73,28 +79,48 @@ export class ApplicantService {
     console.log(this.storage.get(STORAGE_KEY) || 'LocaL storage is empty');
   }
   // =================================================
+  // ================================================
+  // =              BUSINESS METHODS                =
+  // ================================================
   addApplicant(applicant: Applicant) {
     this.applicants.push(applicant);
   }
-  selectApplicant(index: number) {
-    console.log('update Service ', index);
+  selectApplicant(id: number) {
     // Get  the current applicant array from local storage
-    const temp = this.storage.get(STORAGE_KEY);
-    const tempApplicant = temp[index - 1];
-    // Do update
-    return tempApplicant;
+    const tempApplicants = this.storage.get(STORAGE_KEY);
+    // tempApplicants.forEach(applicant => {
+    //   if (applicant.id === id) {
+    //     this.tempApplicant = applicant;
+    //     break;
+    //   }
+    // });
+    for (let i = 0; i < tempApplicants.length; i++) {
+      if (tempApplicants[i].id === id) {
+        this.tempApplicant = tempApplicants[i];
+        break;
+      }
+    }
+
+    return this.tempApplicant;
   }
+
   updateApplicant(applicant: Applicant) {
     const id = applicant.id;
-    let tempApplicant = this.selectApplicant(id - 1);
-    tempApplicant = applicant;
-    // replace
     const temp = this.storage.get(STORAGE_KEY);
-    temp[id - 1] = tempApplicant;
+
+    // Replace
+    for (let i = 0; i < temp.length; i++) {
+      if (temp[i].id === id) {
+        temp[i] = applicant;
+        break;
+      }
+    }
+
     this.storage.set(STORAGE_KEY, temp);
     console.log(this.storage);
   }
 
+  // Get Applicanst List > return empty for null array in LS
   getApplicants() {
     if (this.storage.get(STORAGE_KEY) === null) {
       return [];
@@ -102,14 +128,26 @@ export class ApplicantService {
       return this.storage.get(STORAGE_KEY);
     }
   }
-
-  deleteApplicant(index: number) {
-    console.log('Delte Service running');
-    console.log('before:', this.storage);
+  //
+  deleteApplicant(id: number) {
     const temp = this.storage.get(STORAGE_KEY);
-    temp.splice(index - 1, 1);
+    // temp.forEach(applicantLoop => {
+    //   if (applicantLoop.id === id) {
+    //     temp.splice(id, 1);
+    //   }
+    // });
+    // Delete
+    for (let i = 0; i <= temp.length; i++) {
+      console.log('loop ' + i);
+
+      if (temp[i].id === id) {
+        console.log('del ' + id + ' at ' + i);
+
+        temp.splice(i, 1);
+        break;
+      }
+    }
     this.storage.set(STORAGE_KEY, temp);
-    console.log(this.storage);
   }
   // ================================================
 }

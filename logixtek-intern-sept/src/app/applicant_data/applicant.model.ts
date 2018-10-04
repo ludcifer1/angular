@@ -1,12 +1,12 @@
 export class Applicant {
   id = 0;
-  name = "";
-  applyFor = "";
-  stage = "";
-  email = "";
-  phone = "";
-  psi = "";
-  psd = "";
+  name = '';
+  applyFor = '';
+  stage = '';
+  email = '';
+  phone = '';
+  psi = '';
+  psd = '';
 
   constructor(
     id: number,

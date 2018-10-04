@@ -10,6 +10,9 @@ import { ConfirmationDialogService } from '../../utils/confirmation-dialog/confi
   providers: [ApplicantService, ConfirmationDialogService]
 })
 export class ApplicantListComponent implements OnInit {
+  // ================================================
+  // =              ATTRIBUTES SECTION              =
+  // ================================================
   @Output()
   applicantSelected = new EventEmitter<Applicant>();
 
@@ -22,17 +25,11 @@ export class ApplicantListComponent implements OnInit {
   @Input()
   alertStatus: string;
 
-  // applicantTest = new Applicant(
-  //   'Test 1',
-  //   'Something',
-  //   'Interviewing',
-  //   'Testsubject@logixtek.com',
-  //   '0111001100',
-  //   'Mr A',
-  //   'Mr B'
-  // );
   applicants: Applicant[] = [];
   nextId = 0;
+  // ================================================
+  // =             CONSTRUCTOR SECTION              =
+  // ================================================
 
   constructor(
     private applicantService: ApplicantService,
@@ -42,42 +39,30 @@ export class ApplicantListComponent implements OnInit {
   ngOnInit() {
     // this.applicants = this.applicantService.getApplicant();
     this.applicants = this.applicantService.getApplicants();
-    console.log(this.alertStatus);
   }
 
   // ================================================
   // =              BUSINESS METHODS                =
   // ================================================
 
-  // Edit Applicant
   getApplicant(id: number, applicant: Applicant) {
     this.applicantSelected.emit(applicant);
   }
 
   onAddApplicant() {
-    // if (this.applicants[0] === undefined) {
-    //   nextId = 1;
-    //   console.log('if here');
-    // } else if (
-    //   nextId === this.applicants[nextId - 1].id &&
-    //   nextId === this.applicants[nextId].id
-    // ) {
-    //   console.log('else here');
-    //   nextId += 1;
-    // }
     this.addApplicant.emit();
   }
 
-  deleteApplicant(index: number) {
+  deleteApplicant(id: number) {
     this.confirmationDialogService
       .confirm(
         'Delete Confirmation',
         'Do you really want to delete Applicant with ID = ',
-        this.applicants[index - 1].id + ' '
+        id + ' '
       )
       .then(confirmed => {
         if (confirmed) {
-          this.applicantService.deleteApplicant(index);
+          this.applicantService.deleteApplicant(id);
           // Reload the list
           this.applicants = this.applicantService.getApplicants();
           this.alertStatus = 'delete';
@@ -90,8 +75,8 @@ export class ApplicantListComponent implements OnInit {
       );
   }
 
-  onUpdateApplicant(index: number) {
-    const tempApplicant = this.applicantService.selectApplicant(index);
+  onUpdateApplicant(id: number) {
+    const tempApplicant = this.applicantService.selectApplicant(id);
     this.applicantSelected.emit(tempApplicant);
   }
 }

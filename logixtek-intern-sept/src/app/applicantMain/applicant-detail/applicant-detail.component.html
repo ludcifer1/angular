@@ -18,12 +18,7 @@
       Apply position needed, please select one from above !
     </div>
   </div>
-  <div class="form-group">
-    <label for="stage" class="font-weight-bold">Stage:  </label>
-    <select class="form-control" id="stage" name="stage" [(ngModel)]="formData.stage">
-      <option *ngFor="let stage of stageArr">{{stage}}</option>
-    </select>
-  </div>
+
   <!-- <div class="form-group">
     <label for="email" class="font-weight-bold">Email: <span style="color: red"> * </span> </label>
     <input type="email" class="form-control" id="email" name="email" [(ngModel)]="formData.email" required email>
@@ -34,14 +29,12 @@
       <div class="input-group-prepend">
         <div class="input-group-text">@</div>
       </div>
-      <input type="email" name="email" id="email" class="form-control" [(ngModel)]="formData.email"
-      pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-      required email
-        #email="ngModel">
+      <input type="email" name="email" id="email" class="form-control" [(ngModel)]="formData.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+        required email #email="ngModel">
     </div>
-      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
-        Invalid Email ! Double check Please ! :)
-      </div>
+    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+      Invalid Email ! Double check Please ! :)
+    </div>
   </div>
   <div class="form-group">
     <label for="phone" class="font-weight-bold">Phone: <span style="color: red"> * </span></label>
@@ -58,6 +51,12 @@
   <div class="form-group">
     <label for="psd" class="font-weight-bold">Phone Screen Date: </label>
     <input type="date" class="form-control" id="psd" name="psd" [(ngModel)]="formData.psd">
+  </div>
+  <div class="form-group">
+    <label for="stage" class="font-weight-bold">Stage: </label>
+    <select class="form-control" id="stage" name="stage" [(ngModel)]="formData.stage">
+      <option *ngFor="let stage of stageArr">{{stage}}</option>
+    </select>
   </div>
   <div class=" row col-sm-5 font-italic">
     <kbd> (<span style="color: red">*</span>) Is required field </kbd>

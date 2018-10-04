@@ -10,6 +10,10 @@ import { NgForm } from '@angular/forms';
   providers: [ApplicantService]
 })
 export class ApplicantDetailComponent implements OnInit {
+  // ================================================
+  // =              ATTRIBUTES SECTION              =
+  // ================================================
+
   @Input()
   formData: Applicant;
 
@@ -22,12 +26,19 @@ export class ApplicantDetailComponent implements OnInit {
   forArr: String[];
   stageArr: String[];
   nextId = 0;
+  // ================================================
+  // =             CONSTRUCTOR SECTION              =
+  // ================================================
+
   constructor(private applicantService: ApplicantService) {}
 
   ngOnInit() {
     this.forArr = this.applicantService.applyForArr;
     this.stageArr = this.applicantService.stageArr;
   }
+  // ================================================
+  // =              BUSINESS METHODS                =
+  // ================================================
 
   onAddApplicant(form: NgForm, event: Event) {
     console.log('on Add applicant');
