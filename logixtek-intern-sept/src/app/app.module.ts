@@ -13,6 +13,8 @@ import { ApplicantDetailComponent } from './applicantMain/applicant-detail/appli
 import { ConfirmationDialogComponent } from './utils/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './utils/confirmation-dialog/confirmation-dialog.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ApplicantRoutingModule } from './applicantMain/applicant-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ApplicantDetailComponent,
     ConfirmationDialogComponent
   ],
-  imports: [BrowserModule, FormsModule, StorageServiceModule, NgbModule.forRoot()],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    StorageServiceModule,
+    NgbModule.forRoot(),
+    AppRoutingModule,
+    ApplicantRoutingModule
+  ],
   providers: [ConfirmationDialogService],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent]

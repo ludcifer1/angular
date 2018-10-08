@@ -1,18 +1,20 @@
-<tr>
-  <th scope="row">{{i+1}}</th>
-  <td>{{applicantData.name}}</td>
-  <td>{{applicantData.applyFor}}</td>
-  <td>{{applicantData.stage}}</td>
-  <td>{{applicantData.email}}</td>
-  <td>{{applicantData.phone}}</td>
-  <td> {{applicantData.psi}}</td>
-  <td> {{applicantData.psd}}</td>
+
+  <th scope="row">{{applicantItem.id}}</th>
+  <td>{{applicantItem.name}}</td>
+  <td>{{applicantItem.applyFor}}</td>
+  <td>{{applicantItem.stage}}</td>
+  <td>{{applicantItem.email}}</td>
+  <td>{{applicantItem.phone}}</td>
+  <td> {{applicantItem.psi}}</td>
+  <td> {{applicantItem.psd}}</td>
+
   <!-- Button part -->
   <td>
-    <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block">Edit</button>
+    <!-- <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block"
+          (click)="getApplicant(i+1,applicant)"
+          >Edit</button> -->
+    <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block" (click)="updateClicked(applicantItem.id)">Edit</button>
   </td>
   <td>
-    <button type="button" class="btn btn-danger btn-my col-md-6 d-inline-block">Delete</button>
+    <button type="button" class="btn btn-danger btn-my col-md-6 d-inline-block" (click)="deleteClicked(applicantItem.id)">Delete</button>
   </td>
-
-</tr>

@@ -26,27 +26,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let applicant of applicants let i =index">
-        <th scope="row">{{applicant.id}}</th>
-        <td>{{applicant.name}}</td>
-        <td>{{applicant.applyFor}}</td>
-        <td>{{applicant.stage}}</td>
-        <td>{{applicant.email}}</td>
-        <td>{{applicant.phone}}</td>
-        <td> {{applicant.psi}}</td>
-        <td> {{applicant.psd}}</td>
-
-        <!-- Button part -->
-        <td>
-          <!-- <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block"
-          (click)="getApplicant(i+1,applicant)"
-          >Edit</button> -->
-          <button type="button" class="btn btn-warning btn-my col-md-6 d-inline-block" (click)="onUpdateApplicant(applicant.id)">Edit</button>
-        </td>
-        <td>
-          <button type="button" class="btn btn-danger btn-my col-md-6 d-inline-block" (click)="deleteApplicant(applicant.id)">Delete</button>
-        </td>
-      </tr>
+      <tr app-applicant-item *ngFor="let applicant of applicants"
+        [applicantItem]="applicant"
+        (selectedUpdate)="updateApplicant($event)"
+        (selectedDelete)="deleteApplicant($event)"></tr>
     </tbody>
   </table>
 </div>

@@ -39,20 +39,20 @@ export class ApplicantListComponent implements OnInit {
   ngOnInit() {
     // this.applicants = this.applicantService.getApplicant();
     this.applicants = this.applicantService.getApplicants();
+    console.log('List: ' + this.applicants);
   }
 
   // ================================================
   // =              BUSINESS METHODS                =
   // ================================================
 
-  getApplicant(id: number, applicant: Applicant) {
+  getApplicant(applicant: Applicant) {
     this.applicantSelected.emit(applicant);
   }
 
   onAddApplicant() {
     this.addApplicant.emit();
   }
-
   deleteApplicant(id: number) {
     this.confirmationDialogService
       .confirm(
@@ -74,9 +74,16 @@ export class ApplicantListComponent implements OnInit {
         )
       );
   }
+  updateApplicant(id: number) {
+    console.log('im running');
+    const tempApp = this.applicantService.selectApplicant(id);
+    this.applicantSelected.emit(tempApp);
+  }
 
   onUpdateApplicant(id: number) {
+    console.log('im runnig boss');
     const tempApplicant = this.applicantService.selectApplicant(id);
     this.applicantSelected.emit(tempApplicant);
   }
+
 }
