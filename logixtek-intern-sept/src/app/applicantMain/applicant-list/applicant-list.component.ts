@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Applicant } from '../../applicant_data/applicant.model';
 import { ApplicantService } from '../service/applicant.service';
 import { ConfirmationDialogService } from '../../utils/confirmation-dialog/confirmation-dialog.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-applicant-list',
@@ -16,16 +17,18 @@ export class ApplicantListComponent implements OnInit {
   @Output()
   applicantSelected = new EventEmitter<Applicant>();
 
-  @Output()
-  addApplicant = new EventEmitter<any>();
+  // @Output()
+  // addApplicant = new EventEmitter<any>();
 
   @Input()
   newApplicantToList: Applicant;
 
   @Input()
   alertStatus: string;
-
-  applicants: Applicant[] = [];
+  /////////////////////////////////////////////////////
+  id: number;
+  len: number;
+  applicants: Applicant[];
   nextId = 0;
   // ================================================
   // =             CONSTRUCTOR SECTION              =
@@ -33,7 +36,9 @@ export class ApplicantListComponent implements OnInit {
 
   constructor(
     private applicantService: ApplicantService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private router: Router,
+    private activeRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -50,9 +55,10 @@ export class ApplicantListComponent implements OnInit {
     this.applicantSelected.emit(applicant);
   }
 
-  onAddApplicant() {
-    this.addApplicant.emit();
-  }
+  // onAddApplicant() {
+  //   this.addApplicant.emit();
+  // }
+
   deleteApplicant(id: number) {
     this.confirmationDialogService
       .confirm(
@@ -77,6 +83,8 @@ export class ApplicantListComponent implements OnInit {
   updateApplicant(id: number) {
     console.log('im running');
     const tempApp = this.applicantService.selectApplicant(id);
+    // router here
+    this.router.navigate([id], { relativeTo: this.activeRoute });
     this.applicantSelected.emit(tempApp);
   }
 
@@ -85,5 +93,8 @@ export class ApplicantListComponent implements OnInit {
     const tempApplicant = this.applicantService.selectApplicant(id);
     this.applicantSelected.emit(tempApplicant);
   }
-
+  /////////////////////////////////////////////////////////////////////////
+  addApplicant() {
+    this.router.navigate(['new'], {relativeTo: this.activeRoute});
+  }
 }

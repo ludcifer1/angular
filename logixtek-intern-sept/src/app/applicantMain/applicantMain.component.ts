@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Applicant } from '../applicant_data/applicant.model';
 import { ApplicantService } from '../applicantMain/service/applicant.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-applicantMain',

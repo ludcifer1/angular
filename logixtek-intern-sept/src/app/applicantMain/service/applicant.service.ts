@@ -150,4 +150,16 @@ export class ApplicantService {
     this.storage.set(STORAGE_KEY, temp);
   }
   // ================================================
+  getId() {
+    this.applicants = this.getApplicants();
+    const len = this.applicants.length;
+    let id;
+    if (len === 0) {
+      id = 1;
+    } else {
+      id = this.applicants[len - 1].id;
+      id += 1;
+    }
+    return id;
+  }
 }

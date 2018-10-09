@@ -15,6 +15,7 @@ import { ConfirmationDialogService } from './utils/confirmation-dialog/confirmat
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApplicantRoutingModule } from './applicantMain/applicant-routing.module';
 import {AppRoutingModule} from './app-routing.module';
+import { PageNotFoundComponent } from './utils/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {AppRoutingModule} from './app-routing.module';
     ApplicantListComponent,
     ApplicantItemComponent,
     ApplicantDetailComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
