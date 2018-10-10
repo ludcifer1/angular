@@ -56,8 +56,6 @@ export class ApplicantDetailComponent implements OnInit {
     const id = +this.route.snapshot.params['id'];
     const mode = this.route.snapshot.params['id'];
 
-    console.log(this.route.snapshot.params);
-    console.log('mode:==>' + mode);
     this.route.params.subscribe((params: Params) => {
       this.formData = this.applicantService.selectApplicant(+params['id']);
     });
@@ -81,9 +79,20 @@ export class ApplicantDetailComponent implements OnInit {
       this.formData = new Applicant(this.id, '', '', '', '', '', '', '');
       this.mode = true;
       console.log('mode', this.mode);
-    } else if (id != null) {
-      this.formData = this.applicantService.selectApplicant(id);
-      this.mode = false;
+    } else {
+      if (!isNaN(id)) {
+        console.log('id', id);
+
+        this.formData = this.applicantService.selectApplicant(id);
+        if (this.formData == null) {
+          // navigate to pagenote found
+          this.router.navigate(['not-found']);
+        }
+        this.mode = false;
+      } else {
+        this.router.navigate(['not-found']);
+        this.mode = false;
+      }
     }
     // =============================================
 

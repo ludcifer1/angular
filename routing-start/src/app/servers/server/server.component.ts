@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './server.component.html',
   styleUrls: ['./server.component.css']
 })
+
 export class ServerComponent implements OnInit {
   server: { id: number; name: string; status: string };
   paramsSubscripstion: Subscription;

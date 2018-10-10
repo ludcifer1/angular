@@ -32,4 +32,5 @@ export class ApplicantItemComponent implements OnInit {
   deleteClicked(id: number) {
     this.selectedDelete.emit(this.applicantService.selectApplicant(id).id);
   }
+
 }
