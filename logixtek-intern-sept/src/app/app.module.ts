@@ -16,6 +16,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApplicantRoutingModule } from './applicantMain/applicant-routing.module';
 import {AppRoutingModule} from './app-routing.module';
 import { PageNotFoundComponent } from './utils/page-not-found/page-not-found.component';
+import { LoginComponent } from './login/login.component';
+import { LoginService} from './guards/login.service';
+import {AuthGuard} from './guards/auth.guard.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { PageNotFoundComponent } from './utils/page-not-found/page-not-found.com
     ApplicantItemComponent,
     ApplicantDetailComponent,
     ConfirmationDialogComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,7 @@ import { PageNotFoundComponent } from './utils/page-not-found/page-not-found.com
     AppRoutingModule,
     ApplicantRoutingModule
   ],
-  providers: [ConfirmationDialogService],
+  providers: [ConfirmationDialogService, LoginService, AuthGuard],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent]
 })

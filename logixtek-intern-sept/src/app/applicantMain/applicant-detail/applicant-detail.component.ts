@@ -32,6 +32,7 @@ export class ApplicantDetailComponent implements OnInit {
   len: number;
   applicants: Applicant[];
   applicantInit: Applicant;
+  allowEdit = false;
   private applicantLink: { id: number; name: string };
   // ================================================
   // =             CONSTRUCTOR SECTION              =
@@ -56,9 +57,13 @@ export class ApplicantDetailComponent implements OnInit {
     const id = +this.route.snapshot.params['id'];
     const mode = this.route.snapshot.params['id'];
 
+    this.route.queryParams.subscribe((queryParam: Params) => {
+      this.allowEdit = queryParam['allowEdit'] === '1' ? true : false;
+    });
     this.route.params.subscribe((params: Params) => {
       this.formData = this.applicantService.selectApplicant(+params['id']);
     });
+
     // ==============================================
     if (mode === 'new') {
       // INIT  AND CHECK FOR NEW OR UPDATE
@@ -78,11 +83,11 @@ export class ApplicantDetailComponent implements OnInit {
       // Create the new Applicant with lastest id for new
       this.formData = new Applicant(this.id, '', '', '', '', '', '', '');
       this.mode = true;
-      console.log('mode', this.mode);
     } else {
       if (!isNaN(id)) {
-        console.log('id', id);
-
+        this.router.navigate(['/applicants', id], {
+          queryParams: { allowEdit: '1' }
+        });
         this.formData = this.applicantService.selectApplicant(id);
         if (this.formData == null) {
           // navigate to pagenote found
