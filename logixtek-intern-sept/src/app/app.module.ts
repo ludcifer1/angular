@@ -19,6 +19,8 @@ import { PageNotFoundComponent } from './utils/page-not-found/page-not-found.com
 import { LoginComponent } from './login/login.component';
 import { LoginService} from './guards/login.service';
 import {AuthGuard} from './guards/auth.guard.service';
+import { AdminService } from './guards/adminstrator.service';
+import {CookieModule, CookieService} from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -39,9 +41,10 @@ import {AuthGuard} from './guards/auth.guard.service';
     StorageServiceModule,
     NgbModule.forRoot(),
     AppRoutingModule,
-    ApplicantRoutingModule
+    ApplicantRoutingModule,
+    CookieModule.forRoot()
   ],
-  providers: [ConfirmationDialogService, LoginService, AuthGuard],
+  providers: [ConfirmationDialogService, LoginService, AuthGuard, AdminService, CookieService],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent]
 })
