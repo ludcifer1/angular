@@ -6,6 +6,7 @@ export class AdminService {
   // ================================================
   // =              ATTRIBUTES SECTION              =
   // ================================================
+
   adminList: Adminstrator[] = [
     new Adminstrator('admin', 'admin'),
     new Adminstrator('123', '123')

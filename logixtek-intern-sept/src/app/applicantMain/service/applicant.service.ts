@@ -76,7 +76,7 @@ export class ApplicantService {
     currentApplicants.push(applicant);
     // insert updated arr to local storage
     this.storage.set(STORAGE_KEY, currentApplicants);
-    console.log(this.storage.get(STORAGE_KEY) || 'LocaL storage is empty');
+
   }
   // =================================================
   // ================================================
@@ -85,9 +85,10 @@ export class ApplicantService {
   addApplicant(applicant: Applicant) {
     this.applicants.push(applicant);
   }
+
   selectApplicant(id: number) {
     // Get  the current applicant array from local storage
-    const tempApplicants = this.storage.get(STORAGE_KEY);
+    const tempApplicants = this.storage.get(STORAGE_KEY) !== null ? this.storage.get(STORAGE_KEY) : new Array<Applicant>();
     // tempApplicants.forEach(applicant => {
     //   if (applicant.id === id) {
     //     this.tempApplicant = applicant;
@@ -149,17 +150,24 @@ export class ApplicantService {
     }
     this.storage.set(STORAGE_KEY, temp);
   }
-  // ================================================
+
+  // =============================  ===================
   getId() {
-    this.applicants = this.getApplicants();
-    const len = this.applicants.length;
+    const applicants = this.getApplicants();
+    let len = 0;
+    if(applicants !== null){
+      len = applicants.length;
+    }
+
     let id;
     if (len === 0) {
       id = 1;
     } else {
-      id = this.applicants[len - 1].id;
+      id = applicants[len - 1].id;
       id += 1;
     }
+    console.log(id);
+
     return id;
   }
 }

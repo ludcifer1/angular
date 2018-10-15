@@ -30,8 +30,6 @@ export class ApplicantMainComponent implements OnInit {
 
   ngOnInit() {
     this.applicants = this.applicantService.getApplicants();
-
-    console.log(this.applicants.length);
   }
 
   // ================================================

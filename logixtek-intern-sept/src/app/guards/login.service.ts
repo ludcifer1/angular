@@ -1,12 +1,12 @@
-import { reject } from 'q';
-import { AdminService } from './adminstrator.service';
-import { Injectable } from '@angular/core';
-import { CookieModule, CookieService } from 'ngx-cookie';
+import { reject } from "q";
+import { AdminService } from "./adminstrator.service";
+import { Injectable } from "@angular/core";
+import { CookieModule, CookieService } from "ngx-cookie";
 
 @Injectable()
 export class LoginService {
   loggedIn = false;
-  sessionKey = 'myLogin';
+  sessionKey = "myLogin";
 
   constructor(
     private admService: AdminService,
@@ -21,7 +21,7 @@ export class LoginService {
         // resolve true
         // else false
         const sessionUser = this.cookieService.get(this.sessionKey);
-        if (sessionUser !== undefined || sessionUser !== null) {
+        if (sessionUser !== undefined && sessionUser !== null) {
           this.loggedIn = true;
         } else {
           this.loggedIn = false;
@@ -50,6 +50,7 @@ export class LoginService {
       return true;
     } else {
       // future complex process
+      this.loggedIn = false;
       return false;
     }
   }

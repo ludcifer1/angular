@@ -22,12 +22,12 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
 
-    console.log('>>>> Guard Run...');
-
+    console.log('>>>> Guard Run <<<<');
 
     // process if login true or fail
     return this.loginService.isAuthenticated().then((authenticated: boolean) => {
       if (authenticated) {
+        console.log('>>>> Guard Passed <<<<');
         return true;
       } else {
         this.router.navigate(['login']);

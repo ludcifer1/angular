@@ -44,7 +44,6 @@ export class ApplicantListComponent implements OnInit {
   ngOnInit() {
     // this.applicants = this.applicantService.getApplicant();
     this.applicants = this.applicantService.getApplicants();
-    console.log('List: ' + this.applicants);
   }
 
   // ================================================
