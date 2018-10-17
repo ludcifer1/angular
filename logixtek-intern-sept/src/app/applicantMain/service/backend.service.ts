@@ -20,5 +20,26 @@ export class BackendService {
       observe: 'response'
     });
   }
+  updateApplicant(updateApplicant: any, id: number) {
+
+    return this.http.post('https://applicantapi.azurewebsites.net/api/Applicant/' + id,
+    updateApplicant,
+    {
+      observe: 'response'
+    });
+  }
+  getApplicant(id: number) {
+    return this.http.get('https://applicantapi.azurewebsites.net/api/Applicant/' + id,
+      {
+        observe: 'response'
+      });
+  }
+  deleteApplicant(id: number) {
+
+    return this.http.delete('https://applicantapi.azurewebsites.net/api/Applicant/' + id,
+      {
+        observe: 'response'
+      });
+  }
 
 }

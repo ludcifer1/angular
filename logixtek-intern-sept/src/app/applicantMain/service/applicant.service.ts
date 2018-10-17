@@ -134,21 +134,21 @@ export class ApplicantService {
     return this.tempApplicant;
   }
 
-  updateApplicant(applicant: Applicant) {
-    const id = applicant.getId;
-    const temp = this.storage.get(STORAGE_KEY);
+  // updateApplicant(applicant: Applicant) {
+  //   const id = applicant.getId;
+  //   const temp = this.storage.get(STORAGE_KEY);
 
-    // Replace
-    for (let i = 0; i < temp.length; i++) {
-      if (temp[i].id === id) {
-        temp[i] = applicant;
-        break;
-      }
-    }
+  //   // Replace
+  //   for (let i = 0; i < temp.length; i++) {
+  //     if (temp[i].id === id) {
+  //       temp[i] = applicant;
+  //       break;
+  //     }
+  //   }
 
-    this.storage.set(STORAGE_KEY, temp);
-    console.log(this.storage);
-  }
+  //   this.storage.set(STORAGE_KEY, temp);
+  //   console.log(this.storage);
+  // }
 
   // Get Applicanst List > return empty for null array in LS
   getApplicants() {
@@ -208,28 +208,37 @@ export class ApplicantService {
   }
 
   //
-  deleteApplicant(id: number) {
-    const temp = this.storage.get(STORAGE_KEY);
-    // temp.forEach(applicantLoop => {
-    //   if (applicantLoop.id === id) {
-    //     temp.splice(id, 1);
-    //   }
-    // });
-    // Delete
-    for (let i = 0; i <= temp.length; i++) {
-      console.log('loop ' + i);
+  // deleteApplicant(id: number) {
+  //   const temp = this.storage.get(STORAGE_KEY);
+  //   // temp.forEach(applicantLoop => {
+  //   //   if (applicantLoop.id === id) {
+  //   //     temp.splice(id, 1);
+  //   //   }
+  //   // });
+  //   // Delete
+  //   for (let i = 0; i <= temp.length; i++) {
+  //     console.log('loop ' + i);
 
-      if (temp[i].id === id) {
-        console.log('del ' + id + ' at ' + i);
+  //     if (temp[i].id === id) {
+  //       console.log('del ' + id + ' at ' + i);
 
-        temp.splice(i, 1);
-        break;
-      }
-    }
-    this.storage.set(STORAGE_KEY, temp);
+  //       temp.splice(i, 1);
+  //       break;
+  //     }
+  //   }
+  //   this.storage.set(STORAGE_KEY, temp);
+  // }
+  getApplicant(id: number) {
+    return this.bakenS.getApplicant(id);
   }
-
-  // =============================  ===================
+  deleteApplicant(id: number) {
+    return this.bakenS.deleteApplicant(id);
+  }
+  updateApplicant(applicant: Applicant) {
+    const id = applicant.getId;
+    return this.bakenS.updateApplicant(applicant, id);
+  }
+  // ================================================
   getId() {
     const applicants = this.getApplicants();
     let len = 0;

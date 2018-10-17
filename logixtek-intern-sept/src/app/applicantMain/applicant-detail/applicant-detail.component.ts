@@ -110,9 +110,9 @@ export class ApplicantDetailComponent implements OnInit {
       //   this.id = this.applicants[this.len - 1].id;
       //   this.id += 1;
       // }
-      this.id = this.applicantService.getId();
+      // this.id = this.applicantService.getId();
       // Create the new Applicant with lastest id for new
-      this.formData = new Applicant(this.id, '', '', null, null, '', '', '', null);
+      this.formData = new Applicant(0, '', '', null, null, '', '', '', null);
       this.mode = true;
     } else {
       if (!isNaN(id)) {
@@ -133,7 +133,7 @@ export class ApplicantDetailComponent implements OnInit {
     // =============================================
 
     // load applicant by id--> formData
-  }
+  } 
   // ================================================
   // =              BUSINESS METHODS                =
   // ================================================
@@ -141,10 +141,12 @@ export class ApplicantDetailComponent implements OnInit {
   onAddApplicant(form: NgForm, event: Event) {
     console.log('on Add applicant');
     const value = form.value;
+    console.log(value);
+
     const newApplicantData = {
       'Id': 0,
-      'FirstName': value.name,
-      'LastName': value.name,
+      'FirstName': value.FirstName,
+      'LastName': value.LastName,
       'ApplyforId': value.applyFor,
       'StageId': value.stage,
       'Email': value.email,

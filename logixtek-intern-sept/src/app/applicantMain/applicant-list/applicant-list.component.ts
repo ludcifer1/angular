@@ -1,15 +1,15 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Applicant } from '../../applicant_data/applicant.model';
-import { ApplicantService } from '../service/applicant.service';
-import { ConfirmationDialogService } from '../../utils/confirmation-dialog/confirmation-dialog.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { BackendService } from '../service/backend.service';
-import { Position } from '../../applicant_data/position.model';
-import { Stage } from '../../applicant_data/stage.model';
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
+import { Applicant } from "../../applicant_data/applicant.model";
+import { ApplicantService } from "../service/applicant.service";
+import { ConfirmationDialogService } from "../../utils/confirmation-dialog/confirmation-dialog.service";
+import { Router, ActivatedRoute } from "@angular/router";
+import { BackendService } from "../service/backend.service";
+import { Position } from "../../applicant_data/position.model";
+import { Stage } from "../../applicant_data/stage.model";
 
 @Component({
-  selector: 'app-applicant-list',
-  templateUrl: './applicant-list.component.html',
+  selector: "app-applicant-list",
+  templateUrl: "./applicant-list.component.html",
   styleUrls: ['./applicant-list.component.css'],
   providers: [ApplicantService, ConfirmationDialogService]
 })
@@ -51,19 +51,13 @@ export class ApplicantListComponent implements OnInit {
     this.loadApplicants();
   }
 
-
   private loadStages() {
     this.applicantService.getAllStage().subscribe(
       (data: any) => {
         this.stages = [];
         // Extract and mapping received data
         for (let i = 0; i < data.length; i++) {
-          this.stages.push(
-            new Stage(
-              data[i].Id,
-              data[i].Name
-            )
-          );
+          this.stages.push(new Stage(data[i].Id, data[i].Name));
         }
       },
       error => console.log(error)
@@ -76,12 +70,7 @@ export class ApplicantListComponent implements OnInit {
         this.positions = [];
         // Extract and mapping received data
         for (let i = 0; i < data.length; i++) {
-          this.positions.push(
-            new Position(
-              data[i].Id,
-              data[i].Name
-            )
-          );
+          this.positions.push(new Position(data[i].Id, data[i].Name));
         }
       },
       error => console.log(error)
@@ -104,7 +93,9 @@ export class ApplicantListComponent implements OnInit {
               data[i].FirstName,
               data[i].LastName,
               new Position(data[i].Applyfor.Id, data[i].Applyfor.Name),
-              data[i].Stage !== null ? new Stage(data[i].Stage.Id, data[i].Stage.Name) : null,
+              data[i].Stage !== null
+                ? new Stage(data[i].Stage.Id, data[i].Stage.Name)
+                : null,
               data[i].Email,
               data[i].Phone,
               data[i].PhoneScreenInterviewer,
@@ -138,9 +129,13 @@ export class ApplicantListComponent implements OnInit {
       )
       .then(confirmed => {
         if (confirmed) {
-          this.applicantService.deleteApplicant(id);
+          this.applicantService
+            .deleteApplicant(id)
+            .subscribe((data: any) => {
+              this.loadApplicants();
+            });
           // Reload the list
-          this.applicants = this.applicantService.getApplicants();
+
           this.alertStatus = 'delete';
         }
       })
@@ -151,8 +146,9 @@ export class ApplicantListComponent implements OnInit {
       );
   }
   updateApplicant(id: number) {
-    console.log('im running');
     const tempApp = this.applicantService.selectApplicant(id);
+    console.log(tempApp);
+
     // router here
     this.router.navigate([id], { relativeTo: this.activeRoute });
     this.applicantSelected.emit(tempApp);
