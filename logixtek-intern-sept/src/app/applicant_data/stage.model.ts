@@ -3,7 +3,11 @@ export class Stage {
   stageName: string;
 
   constructor(id: number, stageName: string) {
-    this.id = id;
+    if (id === null) {
+      this.id = 1;
+    } else {
+      this.id = id;
+    }
     this.stageName = stageName;
   }
   public get getId(): number {
@@ -15,7 +19,11 @@ export class Stage {
   }
 
   public set setId(id: number) {
-    this.id = id;
+    if (id === null) {
+      this.id = 1;
+    } else {
+      this.id = id;
+    }
   }
 
   public set setStageName(name: string) {

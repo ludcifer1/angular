@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 import { BackendService } from './backend.service';
 import { map } from 'rxjs/operators';
-import { ApplyFor } from '../../applicant_data/position.model';
+import { Position } from '../../applicant_data/position.model';
 import { Stage } from '../../applicant_data/stage.model';
 import { BackendAFService } from './backend-ApplyFor.service';
 import { BackendStageService } from './backend-Stage.service';
@@ -74,8 +74,7 @@ export class ApplicantService {
   // ];
   // ===============================================
   //
-  applyForArr: ApplyFor[] = [];
-  stageArr: Stage[] = [];
+
 
   tempApplicant: Applicant;
 
@@ -177,7 +176,7 @@ export class ApplicantService {
               )
             );
   }
-  getAllStage(){
+  getAllStage() {
     return this.bakenStage.getAllStage()
       .pipe(
         map(
@@ -192,7 +191,7 @@ export class ApplicantService {
         )
       );
   }
-  getAllAF(){
+  getAllAF() {
     return this.bakenAF.getAllApplyFor()
       .pipe(
         map(

@@ -3,6 +3,9 @@ export class Position {
   private Name: string;
 
   constructor(id: number, Name: string) {
+    if (id === null) {
+      this.Id = 1;
+    }
     this.Id = id;
     this.Name = Name;
   }
@@ -16,8 +19,11 @@ export class Position {
   }
 
   public set setId(id: number) {
-    this.Id = id;
-  }
+    if (id === null) {
+      this.Id = 1;
+    } else {
+      this.Id = id;
+    }  }
 
   public set setApplyForName(name: string) {
     this.Name = name;

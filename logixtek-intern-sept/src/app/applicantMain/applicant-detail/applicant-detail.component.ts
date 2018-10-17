@@ -4,7 +4,7 @@ import { ApplicantService } from '../service/applicant.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ApplyFor, Position } from '../../applicant_data/position.model';
+import { Position } from '../../applicant_data/position.model';
 import { Stage } from '../../applicant_data/stage.model';
 
 @Component({
@@ -26,8 +26,8 @@ export class ApplicantDetailComponent implements OnInit {
   @Input()
   modeData: string;
 
-  forArr: ApplyFor[];
-  stageArr: Stage[];
+  forArr: any[];
+  stageArr: any[];
   nextId = 0;
   mode = true;
   id: number;

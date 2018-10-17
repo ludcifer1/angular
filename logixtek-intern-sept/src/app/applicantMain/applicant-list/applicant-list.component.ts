@@ -32,6 +32,8 @@ export class ApplicantListComponent implements OnInit {
   id: number;
   len: number;
   applicants: Applicant[];
+  stages: Stage[];
+  positions: Position[];
   nextId = 0;
   // ================================================
   // =             CONSTRUCTOR SECTION              =
@@ -46,8 +48,47 @@ export class ApplicantListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loadApplicants();
+  }
 
-    // this.applicants = this.applicantService.getApplicants();
+
+  private loadStages() {
+    this.applicantService.getAllStage().subscribe(
+      (data: any) => {
+        this.stages = [];
+        // Extract and mapping received data
+        for (let i = 0; i < data.length; i++) {
+          this.stages.push(
+            new Stage(
+              data[i].Id,
+              data[i].Name
+            )
+          );
+        }
+      },
+      error => console.log(error)
+    );
+  }
+
+  private loadPositions() {
+    this.applicantService.getAllAF().subscribe(
+      (data: any) => {
+        this.positions = [];
+        // Extract and mapping received data
+        for (let i = 0; i < data.length; i++) {
+          this.positions.push(
+            new Position(
+              data[i].Id,
+              data[i].Name
+            )
+          );
+        }
+      },
+      error => console.log(error)
+    );
+  }
+
+  private loadApplicants() {
     this.applicantService.getAll().subscribe(
       (data: any) => {
         console.log(data);
@@ -63,7 +104,7 @@ export class ApplicantListComponent implements OnInit {
               data[i].FirstName,
               data[i].LastName,
               new Position(data[i].Applyfor.Id, data[i].Applyfor.Name),
-              new Stage(data[i].Stage.Id, data[i].Stage.Name),
+              data[i].Stage !== null ? new Stage(data[i].Stage.Id, data[i].Stage.Name) : null,
               data[i].Email,
               data[i].Phone,
               data[i].PhoneScreenInterviewer,

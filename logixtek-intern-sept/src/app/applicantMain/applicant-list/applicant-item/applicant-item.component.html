@@ -1,7 +1,7 @@
 <th scope="row">{{applicantItem.getId}}</th>
 <td>{{applicantItem.getName}}</td>
-<td>{{applicantItem.getStageToString}}</td>
 <td>{{applicantItem.getApplyForToString}}</td>
+<td>{{applicantItem.getStage !== null ? applicantItem.getStageToString : ""}}</td>
 <td>{{applicantItem.getEmailAddress}}</td>
 <td>{{applicantItem.getPhone}}</td>
 <td> {{applicantItem.getPhoneScreenInterviewer}}</td>

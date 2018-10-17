@@ -55,13 +55,13 @@ export class ApplicantMainComponent implements OnInit {
       this.id = 1;
       console.log('init');
     } else {
-      this.id = this.applicants[this.len - 1].id;
+      this.id = this.applicants[this.len - 1].getId;
       this.id += 1;
     }
     console.log('len:' + this.len);
     console.log('id ' + this.id);
 
-    this.applicantSelected = new Applicant(this.id, '', '', '', '', '', '', '');
+    this.applicantSelected = new Applicant(this.id, '', '', null, null, '', '', '', null);
     this.modeData = 'new';
     this.loadedFeature = 'Detail';
   }

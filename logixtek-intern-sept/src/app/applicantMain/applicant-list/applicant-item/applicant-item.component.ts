@@ -31,11 +31,11 @@ export class ApplicantItemComponent implements OnInit {
 
   ngOnInit() {}
   updateClicked(id: number) {
-    this.selectedUpdate.emit(this.applicantService.selectApplicant(id).id);
+    this.selectedUpdate.emit(this.applicantService.selectApplicant(id).getId);
     // this.router.navigate(['/applicants', id ], {queryParams: {allowEdit: '1'}});
   }
   deleteClicked(id: number) {
-    this.selectedDelete.emit(this.applicantService.selectApplicant(id).id);
+    this.selectedDelete.emit(this.applicantService.selectApplicant(id).getId);
   }
 
 }
