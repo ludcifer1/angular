@@ -11,7 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
   providers: [ApplicantService, ConfirmationDialogService]
 })
 export class ApplicantItemComponent implements OnInit {
-  applicants: Applicant[] = [];
 
   @Input()
   applicantItem: Applicant;
@@ -27,7 +26,8 @@ export class ApplicantItemComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private confirmationDialogService: ConfirmationDialogService
-  ) {}
+  ) {
+  }
 
   ngOnInit() {}
   updateClicked(id: number) {

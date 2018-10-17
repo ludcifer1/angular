@@ -3,6 +3,9 @@ import { Applicant } from '../../applicant_data/applicant.model';
 import { ApplicantService } from '../service/applicant.service';
 import { ConfirmationDialogService } from '../../utils/confirmation-dialog/confirmation-dialog.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { BackendService } from '../service/backend.service';
+import { Position } from '../../applicant_data/position.model';
+import { Stage } from '../../applicant_data/stage.model';
 
 @Component({
   selector: 'app-applicant-list',
@@ -38,12 +41,39 @@ export class ApplicantListComponent implements OnInit {
     private applicantService: ApplicantService,
     private confirmationDialogService: ConfirmationDialogService,
     private router: Router,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private bakenS: BackendService
   ) {}
 
   ngOnInit() {
-    // this.applicants = this.applicantService.getApplicant();
-    this.applicants = this.applicantService.getApplicants();
+
+    // this.applicants = this.applicantService.getApplicants();
+    this.applicantService.getAll().subscribe(
+      (data: any) => {
+        console.log(data);
+
+        this.applicants = [];
+        // Extract and mapping received data
+        // this.applicants = data;
+        console.log('get data to applicants successful');
+        for (let i = 0; i < data.length; i++) {
+          this.applicants.push(
+            new Applicant(
+              data[i].Id,
+              data[i].FirstName,
+              data[i].LastName,
+              new Position(data[i].Applyfor.Id, data[i].Applyfor.Name),
+              new Stage(data[i].Stage.Id, data[i].Stage.Name),
+              data[i].Email,
+              data[i].Phone,
+              data[i].PhoneScreenInterviewer,
+              new Date(data[i].PhoneScreenDate)
+            )
+          );
+        }
+      },
+      error => console.log(error)
+    );
   }
 
   // ================================================
@@ -94,6 +124,6 @@ export class ApplicantListComponent implements OnInit {
   }
   /////////////////////////////////////////////////////////////////////////
   addApplicant() {
-    this.router.navigate(['new'], {relativeTo: this.activeRoute});
+    this.router.navigate(['new'], { relativeTo: this.activeRoute });
   }
 }

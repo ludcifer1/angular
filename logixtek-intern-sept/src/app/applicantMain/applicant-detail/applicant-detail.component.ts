@@ -4,6 +4,8 @@ import { ApplicantService } from '../service/applicant.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ApplyFor, Position } from '../../applicant_data/position.model';
+import { Stage } from '../../applicant_data/stage.model';
 
 @Component({
   selector: 'app-applicant-detail',
@@ -24,8 +26,8 @@ export class ApplicantDetailComponent implements OnInit {
   @Input()
   modeData: string;
 
-  forArr: String[];
-  stageArr: String[];
+  forArr: ApplyFor[];
+  stageArr: Stage[];
   nextId = 0;
   mode = true;
   id: number;
@@ -46,8 +48,37 @@ export class ApplicantDetailComponent implements OnInit {
 
   ngOnInit() {
     // =============================================
-    this.forArr = this.applicantService.applyForArr;
-    this.stageArr = this.applicantService.stageArr;
+    this.applicantService.getAllAF().subscribe(
+      (data: any) => {
+        this.forArr = [];
+        // Extract and mapping received data
+        for (let i = 0; i < data.length; i++) {
+          this.forArr.push(
+            new Position(
+              data[i].Id,
+              data[i].Name
+            )
+          );
+        }
+      },
+      error => console.log(error)
+    );
+    //
+    this.applicantService.getAllStage().subscribe(
+      (data: any) => {
+        this.stageArr = [];
+        // Extract and mapping received data
+        for (let i = 0; i < data.length; i++) {
+          this.stageArr.push(
+            new Stage(
+              data[i].Id,
+              data[i].Name
+            )
+            );
+          }
+      },
+      error => console.log(error)
+    );
     // this.applicants = this.applicantService.getApplicants();
     // =============================================
 
@@ -81,7 +112,7 @@ export class ApplicantDetailComponent implements OnInit {
       // }
       this.id = this.applicantService.getId();
       // Create the new Applicant with lastest id for new
-      this.formData = new Applicant(this.id, '', '', '', '', '', '', '');
+      this.formData = new Applicant(this.id, '', '', null, null, '', '', '', null);
       this.mode = true;
     } else {
       if (!isNaN(id)) {
@@ -110,20 +141,27 @@ export class ApplicantDetailComponent implements OnInit {
   onAddApplicant(form: NgForm, event: Event) {
     console.log('on Add applicant');
     const value = form.value;
-    const newApplicantData = new Applicant(
-      (value.id = this.formData.id),
-      value.name,
-      value.applyFor,
-      value.stage,
-      value.email,
-      value.phone,
-      value.psi,
-      value.psd
-    );
+    const newApplicantData = {
+      'Id': 0,
+      'FirstName': value.name,
+      'LastName': value.name,
+      'ApplyforId': value.applyFor,
+      'StageId': value.stage,
+      'Email': value.email,
+      'Phone': value.phone,
+      'PhoneScreenInterviewer': value.psi,
+      'PhoneScreenDate': value.psd,
+      'Applyfor': null,
+      'Stage': null
+    };
 
     // this.applicantService.addApplicant(newApplicantData);
-    console.log(this.formData.id, newApplicantData);
-    this.applicantService.storeOnLocalStorage(newApplicantData);
+    // this.applicantService.storeOnLocalStorage(newApplicantData);
+    this.applicantService.addApplicant(newApplicantData).subscribe(
+      (data: any) => {
+        console.log(data);
+      }
+    );
     this.formSubmit.emit();
     event.preventDefault();
     this.router.navigate(['../']);

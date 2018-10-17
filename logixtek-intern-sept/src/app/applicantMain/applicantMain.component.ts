@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Applicant } from '../applicant_data/applicant.model';
 import { ApplicantService } from '../applicantMain/service/applicant.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { BackendService } from './service/backend.service';
+import { BackendAFService } from './service/backend-ApplyFor.service';
+import { BackendStageService } from './service/backend-Stage.service';
 
 @Component({
   selector: 'app-applicantMain',
   templateUrl: './applicantMain.component.html',
   styleUrls: ['./applicantMain.component.css'],
-  providers: [ApplicantService]
+  providers: [ApplicantService, BackendService, BackendAFService, BackendStageService]
 })
 export class ApplicantMainComponent implements OnInit {
   // ================================================
@@ -26,12 +29,16 @@ export class ApplicantMainComponent implements OnInit {
   // =             CONSTRUCTOR SECTION              =
   // ================================================
 
-  constructor(private applicantService: ApplicantService) {}
+  constructor(
+    private applicantService: ApplicantService,
+    private bakenS: BackendService
+  ) {}
 
   ngOnInit() {
-    this.applicants = this.applicantService.getApplicants();
-  }
+    // this.applicants = this.applicantService.getApplicants();
 
+
+  }
   // ================================================
   // =                EVENT SECTION                 =
   // ================================================
@@ -57,7 +64,6 @@ export class ApplicantMainComponent implements OnInit {
     this.applicantSelected = new Applicant(this.id, '', '', '', '', '', '', '');
     this.modeData = 'new';
     this.loadedFeature = 'Detail';
-
   }
   onApplicantSelected(applicant: Applicant) {
     this.applicantSelected = applicant;

@@ -1,11 +1,11 @@
-<th scope="row">{{applicantItem.id}}</th>
-<td>{{applicantItem.name}}</td>
-<td>{{applicantItem.applyFor}}</td>
-<td>{{applicantItem.stage}}</td>
-<td>{{applicantItem.email}}</td>
-<td>{{applicantItem.phone}}</td>
-<td> {{applicantItem.psi}}</td>
-<td> {{applicantItem.psd| date:'dd/MM/yyyy'}}</td>
+<th scope="row">{{applicantItem.getId}}</th>
+<td>{{applicantItem.getName}}</td>
+<td>{{applicantItem.getStageToString}}</td>
+<td>{{applicantItem.getApplyForToString}}</td>
+<td>{{applicantItem.getEmailAddress}}</td>
+<td>{{applicantItem.getPhone}}</td>
+<td> {{applicantItem.getPhoneScreenInterviewer}}</td>
+<td> {{applicantItem.getPhoneScreenDate| date:'dd/MM/yyyy'}}</td>
 
 <!-- Button part -->
 <td>

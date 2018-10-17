@@ -12,7 +12,7 @@
     <label for="applyFor" class="font-weight-bold">Apply for: <span style="color: red"> * </span> </label>
     <select class=" form-control" id="applyFor" name="applyFor" [(ngModel)]="formData.applyFor" required #applyFor="ngModel">
       <option *ngFor="
-      let applyFor of forArr">{{applyFor}}</option>
+let applyFor of forArr" value="{{applyFor.getId}}">{{applyFor.getName}}</option>
     </select>
     <div [hidden]="applyFor.valid || applyFor.pristine" class="alert alert-danger">
       Apply position needed, please select one from above !
@@ -55,7 +55,7 @@
   <div class="form-group">
     <label for="stage" class="font-weight-bold">Stage: </label>
     <select class="form-control" id="stage" name="stage" [(ngModel)]="formData.stage">
-      <option *ngFor="let stage of stageArr">{{stage}}</option>
+      <option *ngFor="let stage of stageArr" value="{{stage.getId}}">{{stage.getName}}</option>
     </select>
   </div>
   <div class=" row col-sm-5 font-italic">

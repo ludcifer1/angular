@@ -1,6 +1,14 @@
 import { Applicant } from '../../applicant_data/applicant.model';
 import { Inject, Injectable } from '@angular/core';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
+import { BackendService } from './backend.service';
+import { map } from 'rxjs/operators';
+import { ApplyFor } from '../../applicant_data/position.model';
+import { Stage } from '../../applicant_data/stage.model';
+import { BackendAFService } from './backend-ApplyFor.service';
+import { BackendStageService } from './backend-Stage.service';
+
+
 // ================================================
 // =              ATTRIBUTES SECTION              =
 // ================================================
@@ -11,58 +19,64 @@ export class ApplicantService {
   // =             CONSTRUCTOR SECTION              =
   // ================================================
 
-  constructor(@Inject(SESSION_STORAGE) private storage: StorageService) {}
+  constructor(
+    @Inject(SESSION_STORAGE) private storage: StorageService,
+    private bakenS: BackendService,
+    private bakenAF: BackendAFService,
+    private bakenStage: BackendStageService,
+  ) {}
   // ================================================
   // =              ATTRIBUTES SECTION              =
   // ================================================
   anotherapplicantList: Applicant[] = [];
 
-  applicants: Applicant[] = [
-    new Applicant(
-      1,
-      'Adam',
-      'SE',
-      'Interviewing',
-      'Testsubject@logixtek.com',
-      '0111001100',
-      'Mr A',
-      'Mr B'
-    ),
-    new Applicant(
-      2,
-      'Eva',
-      'ASE',
-      'Interviewing',
-      'Testsubject@logixtek.com',
-      '0111001100',
-      'Mr A',
-      'Mr B'
-    ),
-    new Applicant(
-      3,
-      'Simba',
-      'ASE',
-      'Interviewing',
-      'Testsubject@logixtek.com',
-      '0111001100',
-      'Mr A',
-      'Mr B'
-    ),
-    new Applicant(
-      4,
-      'Putang',
-      'SE',
-      'Interviewing',
-      'Testsubject@logixtek.com',
-      '0111001100',
-      'Mr A',
-      'Mr B'
-    )
-  ];
+  // applicants: Applicant[] = [
+  //   new Applicant(
+  //     1,
+  //     'Adam',
+  //     'SE',
+  //     'Interviewing',
+  //     'Testsubject@logixtek.com',
+  //     '0111001100',
+  //     'Mr A',
+  //     'Mr B'
+  //   ),
+  //   new Applicant(
+  //     2,
+  //     'Eva',
+  //     'ASE',
+  //     'Interviewing',
+  //     'Testsubject@logixtek.com',
+  //     '0111001100',
+  //     'Mr A',
+  //     'Mr B'
+  //   ),
+  //   new Applicant(
+  //     3,
+  //     'Simba',
+  //     'ASE',
+  //     'Interviewing',
+  //     'Testsubject@logixtek.com',
+  //     '0111001100',
+  //     'Mr A',
+  //     'Mr B'
+  //   ),
+  //   new Applicant(
+  //     4,
+  //     'Putang',
+  //     'SE',
+  //     'Interviewing',
+  //     'Testsubject@logixtek.com',
+  //     '0111001100',
+  //     'Mr A',
+  //     'Mr B'
+  //   )
+  // ];
   // ===============================================
   //
-  applyForArr: String[] = ['ASE', 'SE', 'SSE', 'TA'];
-  stageArr: String[] = ['N/A', 'Interviewing', 'Done'];
+  applyForArr: ApplyFor[] = [];
+  stageArr: Stage[] = [];
+
   tempApplicant: Applicant;
 
   // ================================================
@@ -76,19 +90,35 @@ export class ApplicantService {
     currentApplicants.push(applicant);
     // insert updated arr to local storage
     this.storage.set(STORAGE_KEY, currentApplicants);
-
   }
   // =================================================
   // ================================================
   // =              BUSINESS METHODS                =
   // ================================================
-  addApplicant(applicant: Applicant) {
-    this.applicants.push(applicant);
+
+  addApplicant(applicant: any) {
+    return this.bakenS.createApplicant(applicant)
+      .pipe(
+        map(
+          (resp) => {
+            if(resp.ok){
+              console.log('New Applicant is added successfully');
+            }else{
+              console.log('Add fail');
+            }
+
+            return resp;
+          }
+        )
+      );
   }
 
   selectApplicant(id: number) {
     // Get  the current applicant array from local storage
-    const tempApplicants = this.storage.get(STORAGE_KEY) !== null ? this.storage.get(STORAGE_KEY) : new Array<Applicant>();
+    const tempApplicants =
+      this.storage.get(STORAGE_KEY) !== null
+        ? this.storage.get(STORAGE_KEY)
+        : new Array<Applicant>();
     // tempApplicants.forEach(applicant => {
     //   if (applicant.id === id) {
     //     this.tempApplicant = applicant;
@@ -106,7 +136,7 @@ export class ApplicantService {
   }
 
   updateApplicant(applicant: Applicant) {
-    const id = applicant.id;
+    const id = applicant.getId;
     const temp = this.storage.get(STORAGE_KEY);
 
     // Replace
@@ -129,6 +159,55 @@ export class ApplicantService {
       return this.storage.get(STORAGE_KEY);
     }
   }
+  //
+  getAll() {
+    // neu nhu sau nay can xu ly cai gi do  truoc khi do du lieu
+    // thi lam nhu sau
+    return this.bakenS.getAllApplicants()
+            .pipe(
+              map(
+                (data) => {
+                    // muon xu li gi cung duoc
+                    // do something
+                    console.log('>>> aaaaaaa');
+
+                    // tra ve du lieu de nguoi khac nhan
+                    return data;
+                }
+              )
+            );
+  }
+  getAllStage(){
+    return this.bakenStage.getAllStage()
+      .pipe(
+        map(
+          (data) => {
+            // muon xu li gi cung duoc
+            // do something
+            console.log('>>> aaaaaaa');
+
+            // tra ve du lieu de nguoi khac nhan
+            return data;
+          }
+        )
+      );
+  }
+  getAllAF(){
+    return this.bakenAF.getAllApplyFor()
+      .pipe(
+        map(
+          (data) => {
+            // muon xu li gi cung duoc
+            // do something
+            console.log('>>> aaaaaaa');
+
+            // tra ve du lieu de nguoi khac nhan
+            return data;
+          }
+        )
+      );
+  }
+
   //
   deleteApplicant(id: number) {
     const temp = this.storage.get(STORAGE_KEY);
@@ -155,7 +234,7 @@ export class ApplicantService {
   getId() {
     const applicants = this.getApplicants();
     let len = 0;
-    if(applicants !== null){
+    if (applicants !== null) {
       len = applicants.length;
     }
 
@@ -163,7 +242,7 @@ export class ApplicantService {
     if (len === 0) {
       id = 1;
     } else {
-      id = applicants[len - 1].id;
+      id = applicants[len - 1].getId;
       id += 1;
     }
     console.log(id);

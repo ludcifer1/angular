@@ -21,6 +21,7 @@ import { LoginService} from './guards/login.service';
 import {AuthGuard} from './guards/auth.guard.service';
 import { AdminService } from './guards/adminstrator.service';
 import {CookieModule, CookieService} from 'ngx-cookie';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {CookieModule, CookieService} from 'ngx-cookie';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     StorageServiceModule,
     NgbModule.forRoot(),
@@ -44,7 +46,13 @@ import {CookieModule, CookieService} from 'ngx-cookie';
     ApplicantRoutingModule,
     CookieModule.forRoot()
   ],
-  providers: [ConfirmationDialogService, LoginService, AuthGuard, AdminService, CookieService],
+  providers: [
+    ConfirmationDialogService,
+    LoginService,
+    AuthGuard,
+    AdminService,
+    CookieService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent]
 })
