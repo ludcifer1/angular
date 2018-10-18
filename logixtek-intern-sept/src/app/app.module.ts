@@ -14,14 +14,14 @@ import { ConfirmationDialogComponent } from './utils/confirmation-dialog/confirm
 import { ConfirmationDialogService } from './utils/confirmation-dialog/confirmation-dialog.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApplicantRoutingModule } from './applicantMain/applicant-routing.module';
-import {AppRoutingModule} from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './utils/page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
-import { LoginService} from './guards/login.service';
-import {AuthGuard} from './guards/auth.guard.service';
+import { LoginService } from './guards/login.service';
+import { AuthGuard } from './guards/auth.guard.service';
 import { AdminService } from './guards/adminstrator.service';
-import {CookieModule, CookieService} from 'ngx-cookie';
-import { HttpClientModule } from "@angular/common/http";
+import { CookieModule, CookieService } from 'ngx-cookie';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { HttpClientModule } from "@angular/common/http";
     NgbModule.forRoot(),
     AppRoutingModule,
     ApplicantRoutingModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
   ],
   providers: [
     ConfirmationDialogService,

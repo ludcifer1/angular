@@ -2,7 +2,7 @@
   <div class="form-group">
     <label for="applicantFirstName" class="font-weight-bold">Applicant's First Name: <span style="color: red"> * </span> </label>
 
-    <input type="text" class="form-control" id="applicantFirstName" name="FirstName" [(ngModel)]="formData.FirstName" required #name="ngModel">
+    <input type="text" class="form-control" id="applicantFirstName" name="FirstName" [(ngModel)]="formData._firstName" required #name="ngModel">
     <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
       Name is required
     </div>
@@ -10,7 +10,7 @@
   <div class="form-group">
     <label for="applicantLastName" class="font-weight-bold">Applicant's Last Name: <span style="color: red"> * </span> </label>
 
-    <input type="text" class="form-control" id="applicantLastName" name="LastName" [(ngModel)]="formData.LastName" required #name="ngModel">
+    <input type="text" class="form-control" id="applicantLastName" name="LastName" [(ngModel)]="formData._lastName" required #name="ngModel">
     <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
       Name is required
     </div>
@@ -18,7 +18,7 @@
 
   <div class="form-group">
     <label for="applyFor" class="font-weight-bold">Apply for: <span style="color: red"> * </span> </label>
-    <select class=" form-control" id="applyFor" name="applyFor" [(ngModel)]="formData.applyFor" required #applyFor="ngModel">
+<select class=" form-control" id="applyFor" name="applyFor" [(ngModel)]="formData._applyFor" required #applyFor="ngModel">
       <option *ngFor="
 let applyFor of forArr" value="{{applyFor.getId}}">{{applyFor.getName}}</option>
     </select>
@@ -37,7 +37,7 @@ let applyFor of forArr" value="{{applyFor.getId}}">{{applyFor.getName}}</option>
       <div class="input-group-prepend">
         <div class="input-group-text">@</div>
       </div>
-      <input type="email" name="email" id="email" class="form-control" [(ngModel)]="formData.email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+<input type="email" name="email" id="email" class="form-control" [(ngModel)]="formData._emailAddress" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
         required email #email="ngModel">
     </div>
     <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
@@ -46,7 +46,7 @@ let applyFor of forArr" value="{{applyFor.getId}}">{{applyFor.getName}}</option>
   </div>
   <div class="form-group">
     <label for="phone" class="font-weight-bold">Phone: <span style="color: red"> * </span></label>
-    <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="formData.phone" pattern="[0-9]*"
+    <input type="text" class="form-control" id="phone" name="phone" [(ngModel)]="formData._phone" pattern="[0-9]*"
       minlength="10" maxlength="10" #phone="ngModel" required>
     <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
       Phone 10 số emei
@@ -54,15 +54,16 @@ let applyFor of forArr" value="{{applyFor.getId}}">{{applyFor.getName}}</option>
   </div>
   <div class="form-group">
     <label for="psi" class="font-weight-bold">Phone Screen Interviewer: </label>
-    <input type="text" class="form-control" id="psi" name="psi" [(ngModel)]="formData.psi">
+<input type="text" class="form-control" id="psi" name="psi" [(ngModel)]="formData._phoneScreenInterviewer">
   </div>
   <div class="form-group">
     <label for="psd" class="font-weight-bold">Phone Screen Date: </label>
-    <input type="date" class="form-control" id="psd" name="psd" [(ngModel)]="formData.psd">
+
+<input type="date" class="form-control" id="psd" name="psd" [(ngModel)]="formData._phoneScreenDate">
   </div>
   <div class="form-group">
     <label for="stage" class="font-weight-bold">Stage: </label>
-    <select class="form-control" id="stage" name="stage" [(ngModel)]="formData.stage">
+<select class="form-control" id="stage" name="stage" [(ngModel)]="formData._stage">
       <option *ngFor="let stage of stageArr" value="{{stage.getId}}">{{stage.getName}}</option>
     </select>
   </div>

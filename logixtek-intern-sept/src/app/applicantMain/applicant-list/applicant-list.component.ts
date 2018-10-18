@@ -1,15 +1,15 @@
-import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
-import { Applicant } from "../../applicant_data/applicant.model";
-import { ApplicantService } from "../service/applicant.service";
-import { ConfirmationDialogService } from "../../utils/confirmation-dialog/confirmation-dialog.service";
-import { Router, ActivatedRoute } from "@angular/router";
-import { BackendService } from "../service/backend.service";
-import { Position } from "../../applicant_data/position.model";
-import { Stage } from "../../applicant_data/stage.model";
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Applicant } from '../../applicant_data/applicant.model';
+import { ApplicantService } from '../service/applicant.service';
+import { ConfirmationDialogService } from '../../utils/confirmation-dialog/confirmation-dialog.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { BackendService } from '../service/backend.service';
+import { Position } from '../../applicant_data/position.model';
+import { Stage } from '../../applicant_data/stage.model';
 
 @Component({
-  selector: "app-applicant-list",
-  templateUrl: "./applicant-list.component.html",
+  selector: 'app-applicant-list',
+  templateUrl: './applicant-list.component.html',
   styleUrls: ['./applicant-list.component.css'],
   providers: [ApplicantService, ConfirmationDialogService]
 })
@@ -145,20 +145,26 @@ export class ApplicantListComponent implements OnInit {
         )
       );
   }
+
   updateApplicant(id: number) {
-    const tempApp = this.applicantService.selectApplicant(id);
-    console.log(tempApp);
-
-    // router here
-    this.router.navigate([id], { relativeTo: this.activeRoute });
-    this.applicantSelected.emit(tempApp);
+    let tempApp;
+    this.applicantService.getApplicant(id).subscribe(
+      (data: any) => {
+         tempApp = data.body;
+        // router here
+        console.log('check 1: id', id);
+        console.log('check 2: tempApp', tempApp);
+        this.router.navigate([id], { relativeTo: this.activeRoute });
+        this.applicantSelected.emit(tempApp);
+      }
+    );
   }
 
-  onUpdateApplicant(id: number) {
-    console.log('im runnig boss');
-    const tempApplicant = this.applicantService.selectApplicant(id);
-    this.applicantSelected.emit(tempApplicant);
-  }
+  // onUpdateApplicant(id: number) {
+  //   console.log('im runnig boss, list component, ' + id);
+  //   const tempApplicant = this.applicantService.selectApplicant(id);
+  //   this.applicantSelected.emit(tempApplicant);
+  // }
   /////////////////////////////////////////////////////////////////////////
   addApplicant() {
     this.router.navigate(['new'], { relativeTo: this.activeRoute });

@@ -1,5 +1,5 @@
-import { Stage } from "./stage.model";
-import { Position } from "./position.model";
+import { Stage } from './stage.model';
+import { Position } from './position.model';
 
 
 export class Applicant {
@@ -80,8 +80,11 @@ export class Applicant {
   }
 
   public get getPhoneScreenDateToString(): string {
-    return this._phoneScreenDate.getFullYear() + "-"
-      + (this._phoneScreenDate.getMonth() + 1) + "-"
+    if (this._phoneScreenDate ==  null) {
+     return '';
+    }
+    return this._phoneScreenDate.getFullYear() + '-'
+      + (this._phoneScreenDate.getMonth() + 1) + '-'
       + this._phoneScreenDate.getDate();
   }
 
@@ -127,10 +130,10 @@ export class Applicant {
   }
 
   public set setPhoneScreenDateFromString(phoneScreenDate: string) {
-    let infos = phoneScreenDate.split("-");
-    let year = Number(infos[0]);
-    let month = Number(infos[1]);
-    let day = Number(infos[2]);
+    const infos = phoneScreenDate.split('-');
+    const year = Number(infos[0]);
+    const month = Number(infos[1]);
+    const day = Number(infos[2]);
     this._phoneScreenDate.setDate(day);
     this._phoneScreenDate.setMonth(month - 1);
     this._phoneScreenDate.setFullYear(year);

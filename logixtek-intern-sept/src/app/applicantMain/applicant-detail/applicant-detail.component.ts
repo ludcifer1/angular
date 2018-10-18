@@ -6,6 +6,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Position } from '../../applicant_data/position.model';
 import { Stage } from '../../applicant_data/stage.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-applicant-detail',
@@ -35,6 +36,8 @@ export class ApplicantDetailComponent implements OnInit {
   applicants: Applicant[];
   applicantInit: Applicant;
   allowEdit = false;
+  temp = null;
+
   private applicantLink: { id: number; name: string };
   // ================================================
   // =             CONSTRUCTOR SECTION              =
@@ -53,12 +56,7 @@ export class ApplicantDetailComponent implements OnInit {
         this.forArr = [];
         // Extract and mapping received data
         for (let i = 0; i < data.length; i++) {
-          this.forArr.push(
-            new Position(
-              data[i].Id,
-              data[i].Name
-            )
-          );
+          this.forArr.push(new Position(data[i].Id, data[i].Name));
         }
       },
       error => console.log(error)
@@ -69,13 +67,8 @@ export class ApplicantDetailComponent implements OnInit {
         this.stageArr = [];
         // Extract and mapping received data
         for (let i = 0; i < data.length; i++) {
-          this.stageArr.push(
-            new Stage(
-              data[i].Id,
-              data[i].Name
-            )
-            );
-          }
+          this.stageArr.push(new Stage(data[i].Id, data[i].Name));
+        }
       },
       error => console.log(error)
     );
@@ -94,7 +87,7 @@ export class ApplicantDetailComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.formData = this.applicantService.selectApplicant(+params['id']);
     });
-
+    this.formData = new Applicant(0, '', '', null, null, '', '', '', null);
     // ==============================================
     if (mode === 'new') {
       // INIT  AND CHECK FOR NEW OR UPDATE
@@ -112,19 +105,33 @@ export class ApplicantDetailComponent implements OnInit {
       // }
       // this.id = this.applicantService.getId();
       // Create the new Applicant with lastest id for new
-      this.formData = new Applicant(0, '', '', null, null, '', '', '', null);
       this.mode = true;
     } else {
       if (!isNaN(id)) {
         this.router.navigate(['/applicants', id], {
           queryParams: { allowEdit: '1' }
         });
-        this.formData = this.applicantService.selectApplicant(id);
-        if (this.formData == null) {
-          // navigate to pagenote found
-          this.router.navigate(['not-found']);
-        }
-        this.mode = false;
+        this.applicantService.getApplicant(id).subscribe((data: any) => {
+          this.formData = new Applicant(
+            data.body.Id,
+            data.body.FirstName,
+            data.body.LastName,
+            data.body.ApplyforId,
+            data.body.StageId,
+            data.body.Email,
+            data.body.Phone,
+            data.body.PhoneScreenInterviewer,
+            this.formatDate(data.body.PhoneScreenDate)
+          );
+          // this.formData = data.body;
+          console.log(this.formData);
+          if (this.formData == null) {
+            // navigate to pagenote found
+            this.router.navigate(['not-found']);
+          }
+          // this.mode = false mean Edit mode enabled and active the Submit Edit button
+          this.mode = false;
+        });
       } else {
         this.router.navigate(['not-found']);
         this.mode = false;
@@ -133,7 +140,7 @@ export class ApplicantDetailComponent implements OnInit {
     // =============================================
 
     // load applicant by id--> formData
-  } 
+  }
   // ================================================
   // =              BUSINESS METHODS                =
   // ================================================
@@ -144,26 +151,26 @@ export class ApplicantDetailComponent implements OnInit {
     console.log(value);
 
     const newApplicantData = {
-      'Id': 0,
-      'FirstName': value.FirstName,
-      'LastName': value.LastName,
-      'ApplyforId': value.applyFor,
-      'StageId': value.stage,
-      'Email': value.email,
-      'Phone': value.phone,
-      'PhoneScreenInterviewer': value.psi,
-      'PhoneScreenDate': value.psd,
-      'Applyfor': null,
-      'Stage': null
+      Id: 0,
+      FirstName: value.FirstName,
+      LastName: value.LastName,
+      ApplyforId: value.applyFor,
+      StageId: value.stage,
+      Email: value.email,
+      Phone: value.phone,
+      PhoneScreenInterviewer: value.psi,
+      PhoneScreenDate: value.psd,
+      Applyfor: null,
+      Stage: null
     };
 
     // this.applicantService.addApplicant(newApplicantData);
     // this.applicantService.storeOnLocalStorage(newApplicantData);
-    this.applicantService.addApplicant(newApplicantData).subscribe(
-      (data: any) => {
+    this.applicantService
+      .addApplicant(newApplicantData)
+      .subscribe((data: any) => {
         console.log(data);
-      }
-    );
+      });
     this.formSubmit.emit();
     event.preventDefault();
     this.router.navigate(['../']);
@@ -190,4 +197,11 @@ export class ApplicantDetailComponent implements OnInit {
   //   }
   // }
   // ====================================================
+
+  formatDate(time: any) {
+    let tempDate: Date;
+    tempDate = moment(time).format('YYYY-MM-DD');
+    // return (tempDate.getFullYear() + '-' + tempDate.getMonth() + '-' + tempDate.getDay());
+    return tempDate;
+  }
 }

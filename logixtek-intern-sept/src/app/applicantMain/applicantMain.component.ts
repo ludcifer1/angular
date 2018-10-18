@@ -46,6 +46,7 @@ export class ApplicantMainComponent implements OnInit {
   onNavigate(feature: string) {
     this.loadedFeature = feature;
   }
+
   onAddApplicant() {
     // Get Lasted Applicant id
     this.applicants = this.applicantService.getApplicants();
@@ -65,7 +66,10 @@ export class ApplicantMainComponent implements OnInit {
     this.modeData = 'new';
     this.loadedFeature = 'Detail';
   }
+
   onApplicantSelected(applicant: Applicant) {
+    console.log('main recevied ,' + applicant);
+
     this.applicantSelected = applicant;
     this.modeData = 'edit';
     this.loadedFeature = 'Detail';
