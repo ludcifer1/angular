@@ -22,7 +22,7 @@ export class BackendService {
   }
   updateApplicant(updateApplicant: any, id: number) {
 
-    return this.http.post('https://applicantapi.azurewebsites.net/api/Applicant/' + id,
+    return this.http.put('https://applicantapi.azurewebsites.net/api/Applicant/' + id,
     updateApplicant,
     {
       observe: 'response'

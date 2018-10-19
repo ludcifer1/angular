@@ -31,7 +31,7 @@ export class ApplicantListComponent implements OnInit {
   /////////////////////////////////////////////////////
   id: number;
   len: number;
-  applicants: Applicant[];
+  applicants: Array<Applicant> = new Array<Applicant>();
   stages: Stage[];
   positions: Position[];
   nextId = 0;
@@ -50,6 +50,9 @@ export class ApplicantListComponent implements OnInit {
   ngOnInit() {
     this.loadApplicants();
   }
+  // ================================================
+  // =             CONSTRUCTOR SECTION              =
+  // ================================================
 
   private loadStages() {
     this.applicantService.getAllStage().subscribe(
@@ -80,9 +83,8 @@ export class ApplicantListComponent implements OnInit {
   private loadApplicants() {
     this.applicantService.getAll().subscribe(
       (data: any) => {
-        console.log(data);
+        this.applicants.splice(0, this.applicants.length);
 
-        this.applicants = [];
         // Extract and mapping received data
         // this.applicants = data;
         console.log('get data to applicants successful');
@@ -112,13 +114,23 @@ export class ApplicantListComponent implements OnInit {
   // =              BUSINESS METHODS                =
   // ================================================
 
+  addApplicant() {
+    this.router.navigate(['new'], { relativeTo: this.activeRoute });
+  }
+  updateApplicant(id: number) {
+    let tempApp;
+    this.applicantService.getApplicant(id).subscribe((data: any) => {
+      tempApp = data.body;
+      // router here
+      console.log('check 1: id', id);
+      console.log('check 2: tempApp', tempApp);
+      this.router.navigate([id], { relativeTo: this.activeRoute });
+      this.applicantSelected.emit(tempApp);
+    });
+  }
   getApplicant(applicant: Applicant) {
     this.applicantSelected.emit(applicant);
   }
-
-  // onAddApplicant() {
-  //   this.addApplicant.emit();
-  // }
 
   deleteApplicant(id: number) {
     this.confirmationDialogService
@@ -129,14 +141,11 @@ export class ApplicantListComponent implements OnInit {
       )
       .then(confirmed => {
         if (confirmed) {
-          this.applicantService
-            .deleteApplicant(id)
-            .subscribe((data: any) => {
-              this.loadApplicants();
-            });
+          this.applicantService.deleteApplicant(id).subscribe((data: any) => {
+            this.loadApplicants();
+            this.alertStatus = 'delete';
+          });
           // Reload the list
-
-          this.alertStatus = 'delete';
         }
       })
       .catch(() =>
@@ -144,29 +153,5 @@ export class ApplicantListComponent implements OnInit {
           'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
         )
       );
-  }
-
-  updateApplicant(id: number) {
-    let tempApp;
-    this.applicantService.getApplicant(id).subscribe(
-      (data: any) => {
-         tempApp = data.body;
-        // router here
-        console.log('check 1: id', id);
-        console.log('check 2: tempApp', tempApp);
-        this.router.navigate([id], { relativeTo: this.activeRoute });
-        this.applicantSelected.emit(tempApp);
-      }
-    );
-  }
-
-  // onUpdateApplicant(id: number) {
-  //   console.log('im runnig boss, list component, ' + id);
-  //   const tempApplicant = this.applicantService.selectApplicant(id);
-  //   this.applicantSelected.emit(tempApplicant);
-  // }
-  /////////////////////////////////////////////////////////////////////////
-  addApplicant() {
-    this.router.navigate(['new'], { relativeTo: this.activeRoute });
   }
 }

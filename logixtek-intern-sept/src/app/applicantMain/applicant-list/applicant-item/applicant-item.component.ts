@@ -33,10 +33,8 @@ export class ApplicantItemComponent implements OnInit {
   updateClicked(id: number) {
     console.log('item on click id', id);
     this.selectedUpdate.emit(id);
-    // this.router.navigate(['/applicants', id ], {queryParams: {allowEdit: '1'}});
   }
   deleteClicked(id: number) {
-    // this.selectedDelete.emit(this.applicantService.selectApplicant(id).getId);
     this.selectedDelete.emit(id);
   }
 
