@@ -83,9 +83,9 @@ export class ApplicantDetailComponent implements OnInit {
     this.route.queryParams.subscribe((queryParam: Params) => {
       this.allowEdit = queryParam['allowEdit'] === '1' ? true : false;
     });
-    this.route.params.subscribe((params: Params) => {
-      this.formData = this.applicantService.selectApplicant(+params['id']);
-    });
+    // this.route.params.subscribe((params: Params) => {
+    //   this.formData = this.applicantService.getApplicant(+params['id']);
+    // });
     this.formData = new Applicant(0, '', '', null, null, '', '', '', null);
     // ==============================================
     if (mode === 'new') {
@@ -171,7 +171,7 @@ export class ApplicantDetailComponent implements OnInit {
   // ====================================================
 
   formatDate(time: any) {
-    let tempDate: String;
+    let tempDate;
     tempDate = moment(time).format('YYYY-MM-DD');
     // return (tempDate.getFullYear() + '-' + tempDate.getMonth() + '-' + tempDate.getDay());
     return tempDate;
