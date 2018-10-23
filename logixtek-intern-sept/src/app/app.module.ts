@@ -21,7 +21,8 @@ import { LoginService } from './guards/login.service';
 import { AuthGuard } from './guards/auth.guard.service';
 import { AdminService } from './guards/adminstrator.service';
 import { CookieModule, CookieService } from 'ngx-cookie';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './applicantMain/service/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginService,
     AuthGuard,
     AdminService,
-    CookieService
+    CookieService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent]

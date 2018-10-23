@@ -76,7 +76,9 @@ export class ApplicantService {
         )
       );
   }
-
+//
+//
+//
   addApplicant(applicant: any) {
     return this.bakenS.createApplicant(applicant)
       .pipe(

@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private loginService: LoginService,
-    private cookieSerivce: CookieService,
+    private cookieSerivce: CookieService
   ) {}
 
   ngOnInit() {
@@ -36,21 +36,19 @@ export class LoginComponent implements OnInit {
     this.username = value.username;
     this.password = value.password;
 
-    this.loginService.logIn(this.username, this.password).subscribe(
-      (response: any) => {
+    this.loginService
+      .logIn(this.username, this.password)
+      .subscribe((response: any) => {
         if (response.ok === true) {
           this.isLogged = true;
           this.sessionKey = response.body.access_token;
-          console.log('ssk', this.sessionKey);
           this.router.navigate(['applicants']);
         }
         if (response.ok === 'false') {
           this.isLogged = false;
           this.router.navigate(['login']);
-         }
-      }
-    );
-
+        }
+      });
 
     // if (this.loginService.isLoggedIn(this.username, this.password)) {
     //   this.isLogged = true;
@@ -58,7 +56,6 @@ export class LoginComponent implements OnInit {
     // } else {
     //   this.isLogged = false;
     //   this.router.navigate(['login']);
-      // wrong message
-    }
+    // wrong message
   }
 }

@@ -10,7 +10,8 @@ export class BackendService {
 
   getAllApplicants() {
     return this.http.get(
-      'https://applicantapi.azurewebsites.net/api/Applicant/GetAll?api-version=1.0'
+      // 'https://applicantapi.azurewebsites.net/api/Applicant/GetAll?api-version=1.0'
+      this.apiUrl
     );
   }
   //

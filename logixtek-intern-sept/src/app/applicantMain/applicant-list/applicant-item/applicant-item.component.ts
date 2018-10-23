@@ -31,7 +31,6 @@ export class ApplicantItemComponent implements OnInit {
 
   ngOnInit() {}
   updateClicked(id: number) {
-    console.log('item on click id', id);
     this.selectedUpdate.emit(id);
   }
   deleteClicked(id: number) {
