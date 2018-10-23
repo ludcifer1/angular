@@ -4,16 +4,16 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { StorageServiceModule } from 'angular-webstorage-service';
 
-import { HeaderComponent } from './applicantMain/header/header.component';
+import { HeaderComponent } from './applicantBase/header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { ApplicantMainComponent } from './applicantMain/applicantMain.component';
-import { ApplicantListComponent } from './applicantMain/applicant-list/applicant-list.component';
-import { ApplicantItemComponent } from './applicantMain/applicant-list/applicant-item/applicant-item.component';
-import { ApplicantDetailComponent } from './applicantMain/applicant-detail/applicant-detail.component';
+import { ApplicantMainComponent } from './applicantBase/applicantMain.component';
+import { ApplicantListComponent } from './applicantBase/applicant-list/applicant-list.component';
+import { ApplicantItemComponent } from './applicantBase/applicant-list/applicant-item/applicant-item.component';
+import { ApplicantDetailComponent } from './applicantBase/applicant-detail/applicant-detail.component';
 import { ConfirmationDialogComponent } from './utils/confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogService } from './utils/confirmation-dialog/confirmation-dialog.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ApplicantRoutingModule } from './applicantMain/applicant-routing.module';
+import { ApplicantRoutingModule } from './applicantBase/applicant-routing.module';
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './utils/page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
@@ -22,7 +22,7 @@ import { AuthGuard } from './guards/auth.guard.service';
 import { AdminService } from './guards/adminstrator.service';
 import { CookieModule, CookieService } from 'ngx-cookie';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './applicantMain/service/auth.interceptor';
+import { AuthInterceptor } from './applicantBase/service/auth.interceptor';
 
 @NgModule({
   declarations: [

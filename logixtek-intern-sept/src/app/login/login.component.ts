@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { LoginService } from '../guards/login.service';
 import { CookieService } from 'ngx-cookie';
-import { BackendService } from '../applicantMain/service/backend.service';
+import { BackendService } from '../applicantBase/service/backend.service';
 
 @Component({
   selector: 'app-login',

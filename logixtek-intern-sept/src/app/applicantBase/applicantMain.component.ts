@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Applicant } from '../applicant_data/applicant.model';
-import { ApplicantService } from '../applicantMain/service/applicant.service';
+import { ApplicantService } from '../applicantBase/service/applicant.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BackendService } from './service/backend.service';
 import { BackendAFService } from './service/backend-ApplyFor.service';

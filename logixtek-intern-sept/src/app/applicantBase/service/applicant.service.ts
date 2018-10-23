@@ -7,6 +7,10 @@ import { Position } from '../../applicant_data/position.model';
 import { Stage } from '../../applicant_data/stage.model';
 import { BackendAFService } from './backend-ApplyFor.service';
 import { BackendStageService } from './backend-Stage.service';
+import { PositionRepository } from '../../repository/position.repository';
+import { StageRepository } from '../../repository/stage.repository';
+import { ApplicantRepository } from '../../repository/applicant.repository';
+
 
 
 // ================================================
@@ -20,10 +24,12 @@ export class ApplicantService {
   // ================================================
 
   constructor(
-    @Inject(SESSION_STORAGE) private storage: StorageService,
     private bakenS: BackendService,
     private bakenAF: BackendAFService,
     private bakenStage: BackendStageService,
+    private stageRep: StageRepository,
+    private posRep: PositionRepository,
+    private appRep: ApplicantRepository
   ) {}
   // ================================================
   // =              ATTRIBUTES SECTION              =
@@ -63,6 +69,19 @@ export class ApplicantService {
         )
       );
   }
+
+// getData(url, para){
+//   return this.http.get(url).pipe(
+//     map(
+//       (data) => {
+//         return data;
+//       },{
+//         //hanldel error
+//       }
+//     )
+//   );
+// }
+
   getAllAF() {
     return this.bakenAF.getAllApplyFor()
       .pipe(
