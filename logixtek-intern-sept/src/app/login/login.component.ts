@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { LoginService } from '../guards/login.service';
+import { LoginService } from '../service/login.service';
 import { CookieService } from 'ngx-cookie';
-import { BackendService } from '../applicantBase/service/backend.service';
+import { ApplicantRepository } from '../repository/applicant.repository';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [BackendService]
+  providers: [ApplicantRepository]
 })
 export class LoginComponent implements OnInit {
   username: string;
@@ -50,12 +50,5 @@ export class LoginComponent implements OnInit {
         }
       });
 
-    // if (this.loginService.isLoggedIn(this.username, this.password)) {
-    //   this.isLogged = true;
-    //   this.router.navigate(['applicants']);
-    // } else {
-    //   this.isLogged = false;
-    //   this.router.navigate(['login']);
-    // wrong message
-  }
+    }
 }

@@ -1,18 +1,19 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Applicant } from '../../applicant_data/applicant.model';
-import { ApplicantService } from '../service/applicant.service';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Position } from '../../applicant_data/position.model';
 import { Stage } from '../../applicant_data/stage.model';
 import * as moment from 'moment';
+import { ApplicantRepository } from '../../repository/applicant.repository';
+import { PositionRepository } from '../../repository/position.repository';
+import { StageRepository } from '../../repository/stage.repository';
 
 @Component({
   selector: 'app-applicant-detail',
   templateUrl: './applicant-detail.component.html',
   styleUrls: ['./applicant-detail.component.css'],
-  providers: [ApplicantService]
 })
 export class ApplicantDetailComponent implements OnInit {
   // ================================================
@@ -44,14 +45,16 @@ export class ApplicantDetailComponent implements OnInit {
   // ================================================
 
   constructor(
-    private applicantService: ApplicantService,
+    private appRep: ApplicantRepository,
+    private posRep: PositionRepository,
+    private stageRep: StageRepository,
     private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit() {
     // =============================================
-    this.applicantService.getAllAF().subscribe(
+    this.posRep.getPosition().subscribe(
       (data: any) => {
         this.forArr = [];
         // Extract and mapping received data
@@ -62,7 +65,7 @@ export class ApplicantDetailComponent implements OnInit {
       error => console.log(error)
     );
     //
-    this.applicantService.getAllStage().subscribe(
+    this.stageRep.getStage().subscribe(
       (data: any) => {
         this.stageArr = [];
         // Extract and mapping received data
@@ -83,9 +86,6 @@ export class ApplicantDetailComponent implements OnInit {
     this.route.queryParams.subscribe((queryParam: Params) => {
       this.allowEdit = queryParam['allowEdit'] === '1' ? true : false;
     });
-    // this.route.params.subscribe((params: Params) => {
-    //   this.formData = this.applicantService.getApplicant(+params['id']);
-    // });
     this.formData = new Applicant(0, '', '', null, null, '', '', '', null);
     // ==============================================
     if (mode === 'new') {
@@ -96,7 +96,7 @@ export class ApplicantDetailComponent implements OnInit {
         this.router.navigate(['/applicants', id], {
           queryParams: { allowEdit: '1' }
         });
-        this.applicantService.getApplicant(id).subscribe((data: any) => {
+        this.appRep.getApplicant(id).subscribe((data: any) => {
           this.formData = new Applicant(
             data.body.Id,
             data.body.FirstName,
@@ -132,14 +132,10 @@ export class ApplicantDetailComponent implements OnInit {
   onAddApplicant(form: NgForm, event: Event) {
     console.log('on Add applicant');
     const value = form.value;
-
-    this.applicantService
-      .addApplicant(Applicant.toJson(value))
-      .subscribe((data: any) => {
-        // sau khi add
-        this.router.navigate(['../']);
-      });
-
+    this.appRep.createApplicant(Applicant.toJson(value))
+    .subscribe((data: any) => {
+      this.router.navigate(['../']);
+    });
     event.preventDefault();
   }
 
@@ -147,12 +143,13 @@ export class ApplicantDetailComponent implements OnInit {
     console.log('on Update applicant');
     const value = form.value;
 
-    this.applicantService
-      .updateApplicant(Applicant.toJson(value, this.formData.getId))
+    this.appRep
+      .updateApplicant(Applicant.toJson(value), this.formData.getId)
       .subscribe((data: any) => {
-        event.preventDefault();
-        this.router.navigate(['../']);
-      });
+          event.preventDefault();
+          this.router.navigate(['../']);
+        }
+      );
   }
 
   onCancel(event: Event) {
@@ -161,19 +158,12 @@ export class ApplicantDetailComponent implements OnInit {
     this.modeData = 'new';
     this.router.navigate(['../']);
   }
-  // checkMode() {
-  //   if (this.modeData === 'new') {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+
   // ====================================================
 
   formatDate(time: any) {
     let tempDate;
     tempDate = moment(time).format('YYYY-MM-DD');
-    // return (tempDate.getFullYear() + '-' + tempDate.getMonth() + '-' + tempDate.getDay());
     return tempDate;
   }
 }

@@ -1,5 +1,4 @@
 import { reject } from 'q';
-import { AdminService } from './adminstrator.service';
 import { Injectable } from '@angular/core';
 import { CookieModule, CookieService } from 'ngx-cookie';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -13,7 +12,6 @@ export class LoginService {
   sessionUser;
 
   constructor(
-    private admService: AdminService,
     private cookieService: CookieService,
     private http: HttpClient
   ) {}

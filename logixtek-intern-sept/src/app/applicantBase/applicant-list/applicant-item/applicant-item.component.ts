@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Applicant } from '../../../applicant_data/applicant.model';
-import { ApplicantService } from '../../service/applicant.service';
 import { ConfirmationDialogService } from '../../../utils/confirmation-dialog/confirmation-dialog.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -8,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   selector: '[app-applicant-item]',
   templateUrl: './applicant-item.component.html',
   styleUrls: ['./applicant-item.component.css'],
-  providers: [ApplicantService, ConfirmationDialogService]
+  providers: [ConfirmationDialogService]
 })
 export class ApplicantItemComponent implements OnInit {
 
@@ -22,7 +21,6 @@ export class ApplicantItemComponent implements OnInit {
   selectedUpdate = new EventEmitter<number>();
 
   constructor(
-    private applicantService: ApplicantService,
     private router: Router,
     private route: ActivatedRoute,
     private confirmationDialogService: ConfirmationDialogService

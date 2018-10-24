@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { LoginService } from '../../guards/login.service';
+import { LoginService } from '../../service/login.service';
 
 @Component({
   selector: 'app-header',

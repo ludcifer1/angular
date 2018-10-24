@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { LoginService } from '../../guards/login.service';
+import { LoginService } from '../service/login.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -21,7 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
       this.LoginService.sessionUser !== undefined
     ) {
       const cloneereq = req.clone({
-        headers: req.headers.set(
+        headers: req.headers.append(
           'Authorization',
           'Bearer ' + this.LoginService.sessionUser.token
         )

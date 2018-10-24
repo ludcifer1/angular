@@ -17,12 +17,13 @@ import { ApplicantRoutingModule } from './applicantBase/applicant-routing.module
 import { AppRoutingModule } from './app-routing.module';
 import { PageNotFoundComponent } from './utils/page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
-import { LoginService } from './guards/login.service';
+import { LoginService } from './service/login.service';
 import { AuthGuard } from './guards/auth.guard.service';
-import { AdminService } from './guards/adminstrator.service';
 import { CookieModule, CookieService } from 'ngx-cookie';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './applicantBase/service/auth.interceptor';
+import { AuthInterceptor } from './service/auth.interceptor';
+import { BaseService } from './service/base.service';
+import { LoggingInterceptor } from './service/logging.interceptor';
 
 @NgModule({
   declarations: [
@@ -51,9 +52,10 @@ import { AuthInterceptor } from './applicantBase/service/auth.interceptor';
     ConfirmationDialogService,
     LoginService,
     AuthGuard,
-    AdminService,
     CookieService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    BaseService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   entryComponents: [ConfirmationDialogComponent]

@@ -1,17 +1,17 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Applicant } from '../../applicant_data/applicant.model';
-import { ApplicantService } from '../service/applicant.service';
 import { ConfirmationDialogService } from '../../utils/confirmation-dialog/confirmation-dialog.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { BackendService } from '../service/backend.service';
+// import { ApplicantRepository } from '../../repository/applicant.repository';
 import { Position } from '../../applicant_data/position.model';
 import { Stage } from '../../applicant_data/stage.model';
+import { ApplicantRepository } from '../../repository/applicant.repository';
 
 @Component({
   selector: 'app-applicant-list',
   templateUrl: './applicant-list.component.html',
   styleUrls: ['./applicant-list.component.css'],
-  providers: [ApplicantService, ConfirmationDialogService]
+  providers: [ ConfirmationDialogService]
 })
 export class ApplicantListComponent implements OnInit {
   // ================================================
@@ -40,11 +40,10 @@ export class ApplicantListComponent implements OnInit {
   // ================================================
 
   constructor(
-    private applicantService: ApplicantService,
+    private appRepo: ApplicantRepository,
     private confirmationDialogService: ConfirmationDialogService,
     private router: Router,
-    private activeRoute: ActivatedRoute,
-    private bakenS: BackendService
+    private activeRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -54,37 +53,12 @@ export class ApplicantListComponent implements OnInit {
   // =             CONSTRUCTOR SECTION              =
   // ================================================
 
-  private loadStages() {
-    this.applicantService.getAllStage().subscribe(
-      (data: any) => {
-        this.stages = [];
-        // Extract and mapping received data
-        for (let i = 0; i < data.length; i++) {
-          this.stages.push(new Stage(data[i].Id, data[i].Name));
-        }
-      },
-      error => console.log(error)
-    );
-  }
-
-  private loadPositions() {
-    this.applicantService.getAllAF().subscribe(
-      (data: any) => {
-        this.positions = [];
-        // Extract and mapping received data
-        for (let i = 0; i < data.length; i++) {
-          this.positions.push(new Position(data[i].Id, data[i].Name));
-        }
-      },
-      error => console.log(error)
-    );
-  }
-
   private loadApplicants() {
-    this.applicantService.getAll().subscribe(
+    this.appRepo.getAllApplicants().subscribe(
       (data: any) => {
-        this.applicants.splice(0, this.applicants.length);
+        console.log(data);
 
+        this.applicants.splice(0, this.applicants.length);
         // Extract and mapping received data
         // this.applicants = data;
         console.log('get data to applicants successful');
@@ -119,7 +93,7 @@ export class ApplicantListComponent implements OnInit {
   }
   updateApplicant(id: number) {
     let tempApp;
-    this.applicantService.getApplicant(id).subscribe((data: any) => {
+    this.appRepo.getApplicant(id).subscribe((data: any) => {
       tempApp = data.body;
       // router here
       console.log('check 1: id', id);
@@ -141,11 +115,14 @@ export class ApplicantListComponent implements OnInit {
       )
       .then(confirmed => {
         if (confirmed) {
-          this.applicantService.deleteApplicant(id).subscribe((data: any) => {
+          // this.applicantService.deleteApplicant(id).subscribe((data: any) => {
+          //   this.loadApplicants();
+          //   this.alertStatus = 'delete';
+          // });
+          this.appRepo.deleteApplicant(id).subscribe((data: any) => {
             this.loadApplicants();
             this.alertStatus = 'delete';
           });
-          // Reload the list
         }
       })
       .catch(() =>
