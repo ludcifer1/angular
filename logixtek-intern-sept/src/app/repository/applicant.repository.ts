@@ -63,6 +63,7 @@ export class ApplicantRepository {
         'Content-Type': 'application/json'
       })
     });
+
     return this.baseService.doGet(option);
   }
 

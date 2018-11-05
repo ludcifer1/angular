@@ -93,9 +93,6 @@ export class ApplicantDetailComponent implements OnInit {
       this.mode = true;
     } else {
       if (!isNaN(id)) {
-        this.router.navigate(['/applicants', id], {
-          queryParams: { allowEdit: '1' }
-        });
         this.appRep.getApplicant(id).subscribe((data: any) => {
           this.formData = new Applicant(
             data.body.Id,
@@ -108,9 +105,11 @@ export class ApplicantDetailComponent implements OnInit {
             data.body.PhoneScreenInterviewer,
             this.formatDate(data.body.PhoneScreenDate)
           );
-          console.log(this.formData);
+
           if (this.formData == null) {
             // navigate to pagenote found
+            console.log('>>>>>>>>>>> FAIL');
+
             this.router.navigate(['not-found']);
           }
           // this.mode = false mean Edit mode enabled and active the Submit Edit button

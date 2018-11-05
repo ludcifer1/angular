@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginService } from '../service/login.service';
 import { CookieService } from 'ngx-cookie';
-import { ApplicantRepository } from '../repository/applicant.repository';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [ApplicantRepository]
 })
 export class LoginComponent implements OnInit {
   username: string;

@@ -98,7 +98,7 @@ export class ApplicantListComponent implements OnInit {
       // router here
       console.log('check 1: id', id);
       console.log('check 2: tempApp', tempApp);
-      this.router.navigate([id], { relativeTo: this.activeRoute });
+      this.router.navigate([id], { relativeTo: this.activeRoute, queryParams: { allowEdit: '1' } });
       this.applicantSelected.emit(tempApp);
     });
   }

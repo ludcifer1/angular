@@ -5,9 +5,9 @@ import { ApplicantDetailComponent } from './applicant-detail/applicant-detail.co
 import { ApplicantItemComponent } from './applicant-list/applicant-item/applicant-item.component';
 import { ApplicantListComponent } from './applicant-list/applicant-list.component';
 import { PageNotFoundComponent } from '../utils/page-not-found/page-not-found.component';
-import {AuthGuard} from '../guards/auth.guard.service';
+import { AuthGuard } from '../guards/auth.guard.service';
 
-const appRoutes: Routes = [
+const applicantRoutes: Routes = [
   {
     path: 'applicants',
     component: ApplicantMainComponent,
@@ -21,21 +21,12 @@ const appRoutes: Routes = [
         path: ':id',
         component: ApplicantDetailComponent
       }
-
-      // {
-      //   path: '**',
-      //   component: PageNotFoundComponent
-      // }
     ]
-  },
-  {
-    path: '**',
-    component: PageNotFoundComponent
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(appRoutes)],
+  imports: [RouterModule.forChild(applicantRoutes)],
   exports: [RouterModule]
 })
 export class ApplicantRoutingModule {}

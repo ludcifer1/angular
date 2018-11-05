@@ -9,11 +9,6 @@ import { PositionRepository } from '../repository/position.repository';
   selector: 'app-applicantMain',
   templateUrl: './applicantMain.component.html',
   styleUrls: ['./applicantMain.component.css'],
-  providers: [
-    ApplicantRepository,
-    StageRepository,
-    PositionRepository
-  ]
 })
 export class ApplicantMainComponent implements OnInit {
   // ================================================

@@ -46,7 +46,16 @@ export class BaseService {
   doGet(option: MyOption) {
     return this.http
       .get(option.url + option.endpoint, option.options)
-      .pipe(catchError(this.ErrorHandler));
+      .pipe(
+        map(
+          (resp) => {
+            console.log('????????????????????');
+            return resp;
+          }
+        ),
+        catchError(this.ErrorHandler)
+      );
+
   }
 
   doPost(option: MyOption, data) {
